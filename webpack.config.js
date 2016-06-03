@@ -2,7 +2,7 @@ var webpack = require("webpack");
 
 module.exports = {
   entry: {
-    app: "./app/app.js",
+    app: "./app/index.js",
     vendor: []
   },
   output: {

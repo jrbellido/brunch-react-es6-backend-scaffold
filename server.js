@@ -1,24 +1,46 @@
+import fp from "path"
+
 import express from "express"
+import hbs from "express-hbs"
 import React from "react"
-import Router from "react-router"
+import { renderToString } from "react-dom/server"
+import { RouterContext, match } from "react-router"
+import { createLocation } from "history/lib/LocationUtils"
+import routes from './app/routes';
 
 const app = express()
 
-app.set('views', './templates')
-app.set('view engine', 'handlebars')
+app.set('view engine', 'hbs')
+app.set('views', fp.join(__dirname, 'templates'))
+app.engine('hbs', hbs.express4({
+  //partialsDir: fp.join(__dirname, 'templates', 'partials')
+}))
 
 app.use(express.static('public'))
 
-app.get("/*", (req, res) => {
-	Router.run(routes, req.url, Handler => {
-		let content = React.renderToString(<Handler />)
-		res.render('index', { content: content })
-	})
+app.use("/*", (req, res) => {
+  const location = createLocation(req.originalUrl)
+
+  match({ routes, location }, (err, redirectLocation, renderProps) => {
+
+    if (err) { 
+      console.error(err)
+      return res.status(500).render('500')
+    }
+    
+    if (!renderProps)
+    	return res.status(404).render('404')
+    
+    const InitialComponent = (
+      <RouterContext {...renderProps} />
+    )
+
+    const componentHTML = renderToString(InitialComponent)
+
+    console.log(componentHTML)
+
+    res.render('app', { content: componentHTML })
+  })
 })
 
-const server = app.listen(3000, () => {  
-  var host = server.address().address
-  var port = server.address().port
-
-  console.log(`Example app listening at http://${host}:${port}`)
-})
+export default app

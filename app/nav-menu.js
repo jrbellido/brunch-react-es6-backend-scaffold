@@ -1,12 +1,13 @@
 import React from "react"
+import { Link } from "react-router"
 
 class NavMenu extends React.Component {
 	render() {
 		return <ul>
-			<li><a href="">Home</a></li>
-			<li><a href="">Panel #1</a></li>
-			<li><a href="">Panel #2</a></li>
-			<li><a href="">Panel #3</a></li>
+			<li><Link to={`/`}>Home</Link></li>
+			<li><Link to={`/component-1`}>Component #1</Link></li>
+			<li><Link to={`/component-2`}>Component #2</Link></li>
+			<li><Link to={`/component-3`}>Component #3</Link></li>
 		</ul>
 	}
 }
