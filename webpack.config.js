@@ -1,9 +1,17 @@
+var webpack = require("webpack");
+
 module.exports = {
-  entry: "./app/app.js",
+  entry: {
+    "app": "./app/app.js",
+    "vendor": []
+  },
   output: {
     path: __dirname,
-    filename: "public/app.js"
+    filename: "public/[name].js"
   },
+  plugins: [
+    //new webpack.optimize.CommonsChunkPlugin("vendor.js")
+  ],
   module: {
     loaders: [
       { test: /\.jsx?$/, loader: "babel", exclude: /(node_modules|bower_components)/, query: {
