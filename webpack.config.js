@@ -2,23 +2,37 @@ var webpack = require("webpack");
 
 module.exports = {
   entry: {
-    "app": "./app/app.js",
-    "vendor": []
+    app: "./app/app.js",
+    vendor: []
   },
   output: {
     path: __dirname,
-    filename: "public/[name].js"
+    filename: "public/assets/[name].js"
   },
   plugins: [
-    //new webpack.optimize.CommonsChunkPlugin("vendor.js")
+    //new webpack.optimize.CommonsChunkPlugin("public/vendor-bundle.js")
   ],
   module: {
+    preLoaders: [
+      {
+        text: /\.js?$/,
+        loader: 'eslint'
+      }
+    ],
     loaders: [
-      { test: /\.jsx?$/, loader: "babel", exclude: /(node_modules|bower_components)/, query: {
-        presets: ["es2015", "react"],
-        cacheDirectory: true
-      } },
-      { test: /\.css$/, loader: "style!css" }
+      { 
+        test: /\.jsx?$/,
+        loader: "babel", 
+        exclude: /(node_modules|bower_components)/, 
+        query: {
+          presets: ["es2015", "react"],
+          cacheDirectory: true
+        } 
+      },
+      { 
+        test: /\.css$/, 
+        loader: "style!css" 
+      }
     ]
   }
 };
