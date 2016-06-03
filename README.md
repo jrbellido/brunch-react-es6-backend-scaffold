@@ -1,4 +1,4 @@
-# webpack+Babel/ES6 Backend scaffold
+# webpack+Babel/ES6 backend scaffold
 
 ## Getting started
 
