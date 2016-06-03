@@ -1,6 +1,6 @@
 {
-  "name": "backend-boilerplate",
-  "description": "React/ES6 backend scaffold",
+  "name": "brunch-react-es6-backend-scaffold",
+  "description": "brunch+React/ES6 backend scaffold",
   "main": "",
   "authors": [
     "Joan R. Bellido <jrbellido@gmail.com>"
