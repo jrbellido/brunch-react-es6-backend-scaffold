@@ -1,9 +1,9 @@
 import React from "react"
 import { Route } from "react-router"
 import AppView from "./app-view"
-import Component1 from "./components/component1"
-import Component2 from "./components/component2"
-import Component3 from "./components/component3"
+import Component1 from "./components/component-1"
+import Component2 from "./components/component-2"
+import Component3 from "./components/component-3"
 
 export default (
   <Route name="app" component={AppView} path="/">

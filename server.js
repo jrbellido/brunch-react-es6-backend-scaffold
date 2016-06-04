@@ -37,8 +37,6 @@ app.use("/*", (req, res) => {
 
     const componentHTML = renderToString(InitialComponent)
 
-    console.log(componentHTML)
-
     res.render('app', { content: componentHTML })
   })
 })

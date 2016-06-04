@@ -2,6 +2,9 @@ import React from "react";
 
 import NavMenu from "./nav-menu"
 
+if (typeof window !== 'undefined')
+  require("./styles/app-view.scss")
+
 export default class AppView extends React.Component {
   render() {
     return (
@@ -12,8 +15,12 @@ export default class AppView extends React.Component {
         <NavMenu />
         
         <hr />
-        
+
         {this.props.children}
+
+        <div className='page-footer'>
+          webpack-react-es6-backend-scaffold
+        </div>
 
       </div>
     )
