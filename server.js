@@ -1,4 +1,5 @@
 import fp from "path"
+import fs from "fs"
 
 import express from "express"
 import hbs from "express-hbs"
@@ -6,12 +7,18 @@ import React from "react"
 import { renderToString } from "react-dom/server"
 import { RouterContext, match } from "react-router"
 import { createLocation } from "history/lib/LocationUtils"
-import routes from './app/routes';
+import { createStore, combineReducers } from "redux"
+import { Provider } from "react-redux"
+import * as reducers from "./app/reducers"
+import routes from "./app/routes"
+import fetchComponentData from "./app/lib/fetchComponentData"
+import Handlebars from "handlebars"
 
 const app = express()
 
 app.set('view engine', 'hbs')
 app.set('views', fp.join(__dirname, 'templates'))
+
 app.engine('hbs', hbs.express4({
   //partialsDir: fp.join(__dirname, 'templates', 'partials')
 }))
@@ -21,8 +28,10 @@ app.use(express.static('public'))
 app.use("/*", (req, res) => {
   const location = createLocation(req.originalUrl)
 
-  match({ routes, location }, (err, redirectLocation, renderProps) => {
+  const reducer = combineReducers(reducers)
+  const store = createStore(reducer)
 
+  match({ routes, location }, (err, redirectLocation, renderProps) => {
     if (err) { 
       console.error(err)
       return res.status(500).render('500')
@@ -30,14 +39,36 @@ app.use("/*", (req, res) => {
     
     if (!renderProps)
     	return res.status(404).render('404')
-    
-    const InitialComponent = (
-      <RouterContext {...renderProps} />
-    )
 
-    const componentHTML = renderToString(InitialComponent)
+    function renderView() {
+      const InitialComponent = (
+        <Provider store={store}>
+          <RouterContext {...renderProps} />
+        </Provider>
+      )
 
-    res.render('app', { content: componentHTML })
+      const initialState = store.getState();
+      const initialStateHtml = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};</script>`
+      
+      const componentHTML = renderToString(InitialComponent)
+
+      const html = 
+        Handlebars.compile(
+          fs.readFileSync(
+            fp.join(__dirname, "templates", "app.hbs")
+          )
+        )({
+          content: componentHTML, 
+          initialState: initialStateHtml 
+        })
+
+      return html
+    }
+
+    fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
+      .then(renderView)
+      .then(html => res.end(html))
+      .catch(err => res.end(err.message));
   })
 })
 
