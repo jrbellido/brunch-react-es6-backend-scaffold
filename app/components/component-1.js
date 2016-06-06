@@ -1,17 +1,9 @@
 import React from "react";
 import PinList from "./pin-list"
 
-import pinterestActions from "../actions/pinterestActions"
+import getTodos from "../actions/pinterestActions"
 
 export default class Component1 extends React.Component {
-  constructor() {
-  	super()
-  	
-  	this.needs = [
-  		pinterestActions.getTodos
-  	]
-  }
-
   render() {
   	const { pins, dispatch } = this.props
 
@@ -23,3 +15,5 @@ export default class Component1 extends React.Component {
     )
   }
 }
+
+Component1.need = [getTodos]
