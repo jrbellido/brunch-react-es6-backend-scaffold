@@ -5,6 +5,8 @@ import { browserHistory } from "react-router"
 
 import routes from "./routes"
 
+let initialState = window.__INITIAL_STATE__
+
 render(
   <Router children={routes} history={browserHistory} />,
   document.getElementById("root")

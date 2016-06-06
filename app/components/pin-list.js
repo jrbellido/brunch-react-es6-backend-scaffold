@@ -6,6 +6,6 @@ export default class PinList extends React.Component {
 			<div className="pin-list">
 			lista de pines
 			</div>
-			)
+		)
 	}
 }

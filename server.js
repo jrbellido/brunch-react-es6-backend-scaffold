@@ -40,35 +40,26 @@ app.use("/*", (req, res) => {
     if (!renderProps)
     	return res.status(404).render('404')
 
-    function renderView() {
-      const InitialComponent = (
-        <Provider store={store}>
-          <RouterContext {...renderProps} />
-        </Provider>
-      )
 
-      const initialState = store.getState();
-      const initialStateHtml = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};</script>`
-      
-      const componentHTML = renderToString(InitialComponent)
+    const InitialComponent = (
+      <Provider store={store}>
+        <RouterContext {...renderProps} />
+      </Provider>
+    )
 
-      const html = 
-        Handlebars.compile(
-          fs.readFileSync(
-            fp.join(__dirname, "templates", "app.hbs")
-          )
-        )({
-          content: componentHTML, 
-          initialState: initialStateHtml 
-        })
+    const initialState = store.getState()
+    const initialStateHtml = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};</script>`
 
-      return html
-    }
+    const componentHTML = renderToString(InitialComponent)
 
     fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
-      .then(renderView)
-      .then(html => res.end(html))
-      .catch(err => res.end(err.message));
+      .then(() => {
+        res.render('app', {
+          content: componentHTML, 
+          initialState: initialStateHtml
+        })
+      })
+      .catch(err => res.end(err.message))
   })
 })
 
