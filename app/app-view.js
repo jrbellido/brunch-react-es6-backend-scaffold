@@ -9,7 +9,9 @@ export default class AppView extends React.Component {
     return (
       <div id="app-view">
         <h1>webpack-react-es6-backend-scaffold</h1>
+        
         <NavMenu />
+        
         <hr />
 
         {this.props.children}

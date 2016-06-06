@@ -9,10 +9,10 @@ import { RouterContext, match } from "react-router"
 import { createLocation } from "history/lib/LocationUtils"
 import { createStore, combineReducers } from "redux"
 import { Provider } from "react-redux"
-import * as reducers from "./app/reducers"
 import routes from "./app/routes"
 import fetchComponentData from "./app/lib/fetchComponentData"
 import Handlebars from "handlebars"
+import ItemReducer from "./app/reducers/ItemReducer"
 
 const app = express()
 
@@ -28,7 +28,7 @@ app.use(express.static('public'))
 app.use("/*", (req, res) => {
   const location = createLocation(req.originalUrl)
 
-  const reducer = combineReducers(reducers)
+  const reducer = combineReducers([ItemReducer])
   const store = createStore(reducer)
 
   match({ routes, location }, (err, redirectLocation, renderProps) => {
@@ -39,7 +39,6 @@ app.use("/*", (req, res) => {
     
     if (!renderProps)
     	return res.status(404).render('404')
-
 
     const InitialComponent = (
       <Provider store={store}>
@@ -55,7 +54,7 @@ app.use("/*", (req, res) => {
     fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
       .then(() => {
         res.render('app', {
-          content: componentHTML, 
+          content: componentHTML,
           initialState: initialStateHtml
         })
       })
