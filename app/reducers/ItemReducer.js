@@ -4,6 +4,8 @@ const defaultState = new Immutable.List()
 
 export default function ItemReducer(state = defaultState, action) {
   switch(action.type) {
+    case 'GET_ITEMS':
+      return new Immutable.List(action.res.data)
     case 'CREATE_ITEM':
       return state.concat(action.name, action.value)
     case 'EDIT_ITEM':
