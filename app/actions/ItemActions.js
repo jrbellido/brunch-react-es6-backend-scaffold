@@ -4,6 +4,8 @@ export function getItems() {
   return {
     type:    'GET_ITEMS',
     promise: new Promise((resolve, reject) => {
+      console.log("GET_ITEMS action fired")
+      
       resolve([
         { name: 'Item#1', value: 5 },
         { name: 'Item#2', value: 3 },

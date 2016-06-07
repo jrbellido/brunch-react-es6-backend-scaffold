@@ -1,9 +1,8 @@
 import React from "react"
 import { Route, IndexRoute } from "react-router"
-import AppView from "./app-view"
+import AppLayout from "./components/app-layout"
 import ItemManager from "./components/item-manager"
-import Component2 from "./components/component-2"
-import Component3 from "./components/component-3"
+import About from "./components/about"
 
 class NoMatch extends React.Component {
 	render() {
@@ -14,10 +13,9 @@ class NoMatch extends React.Component {
 }
 
 export default (
-  <Route name="app" component={AppView} path="/">
+  <Route name="app" component={AppLayout} path="/">
   	<IndexRoute component={ItemManager}/>
-  	<Route path="component-2" component={Component2}/>
-  	<Route path="component-3" component={Component3}/>
+  	<Route path="about" component={About}/>
   	<Route path="*" component={NoMatch}/>
   </Route>
 )

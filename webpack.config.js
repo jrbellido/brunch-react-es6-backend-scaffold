@@ -37,6 +37,7 @@ module.exports = {
         exclude: /(node_modules|bower_components)/, 
         query: {
           presets: ["es2015", "es2016", "react"],
+          plugins: ["transform-decorators-legacy", "transform-class-properties", "transform-object-rest-spread"],
           cacheDirectory: true
         }
       },
