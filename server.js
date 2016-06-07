@@ -3,6 +3,7 @@ import fs from "fs"
 
 import express from "express"
 import hbs from "express-hbs"
+import bunyan from "bunyan"
 import React from "react"
 import { renderToString } from "react-dom/server"
 import { RouterContext, match } from "react-router"
@@ -15,6 +16,11 @@ import Handlebars from "handlebars"
 import ItemReducer from "./app/reducers/ItemReducer"
 
 const app = express()
+
+const log = bunyan.createLogger({
+  name: 'webpack-react',
+  level: 'trace'
+})
 
 app.set('view engine', 'hbs')
 app.set('views', fp.join(__dirname, 'templates'))
@@ -33,7 +39,7 @@ app.use("/*", (req, res) => {
 
   match({ routes, location }, (err, redirectLocation, renderProps) => {
     if (err) { 
-      console.error(err)
+      log.error(err)
       return res.status(500).render('500')
     }
     
@@ -50,6 +56,8 @@ app.use("/*", (req, res) => {
     const initialStateHtml = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};</script>`
 
     const componentHTML = renderToString(InitialComponent)
+
+    log.debug(initialState)
 
     fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
       .then(() => {
