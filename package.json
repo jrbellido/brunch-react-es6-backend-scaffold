@@ -48,8 +48,10 @@
     "react-router": "^2.4.1",
     "redux": "^3.5.2",
     "sass-loader": "^3.2.0",
+    "serve-favicon": "^2.3.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "winston": "^2.2.0"
   }
 }
