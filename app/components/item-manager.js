@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from "react"
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 
+import Immutable from "immutable"
+
 import * as ItemActions from "../actions/ItemActions"
 
 import ItemForm from "./item-form"
@@ -17,8 +19,50 @@ class ItemManager extends Component {
     ItemActions.getItems
   ]
 
+  getInitialState() {
+    console.log("ItemManager->getInitialState()")
+  }
+
+  getDefaultProps() {
+    console.log("ItemManager->getDefaultProps()")
+  }
+
+  componentWillMount() {
+    console.log("ItemManager->componentWillMount()") 
+
+    //this.props.items = Immutable.List([Immutable.Map({id: 1, name: "item#1", value: 5.1})])
+  }
+
+  componentDidMount() {
+    console.log("ItemManager->componentDidMount()")
+  }
+
+  componentWillReceiveProps() {
+    console.log("ItemManager->componentWillReceiveProps()")
+  }
+
+  shouldComponentUpdate() {
+    return true
+  }
+
+  componentWillUpdate() {
+    console.log("ItemManager->componentWillUpdate()")
+  }
+
+  componentDidUpdate() {
+    console.log("ItemManager->componentDidUpdate()")
+  }
+
+  componentWillUnmount() {
+   console.log("ItemManager->componentWillUnmount()") 
+  }
+
   render() {
-    const { items, dispatch } = this.props
+    console.log("ItemManager->render()")
+
+    const dispatch = this.props.dispatch
+    const items = this.props.items
+
 
     return (
       <div className="item-manager">

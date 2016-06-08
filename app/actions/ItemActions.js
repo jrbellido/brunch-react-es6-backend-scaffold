@@ -3,6 +3,7 @@ import request from "axios"
 const API_URL = 'http://localhost:3131/item';
 
 export function getItems() {
+  console.log('getItems()')
   return {
     type: 'GET_ITEMS',
     promise: request.get(API_URL)
