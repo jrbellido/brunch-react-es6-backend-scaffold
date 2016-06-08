@@ -1,4 +1,7 @@
 export default function promiseMiddleware() {
+
+  console.log("promiseMiddleware...")
+
   return next => action => {
     const { promise, type, ...rest } = action
 

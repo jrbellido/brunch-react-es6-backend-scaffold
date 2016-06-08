@@ -47,6 +47,8 @@ app.use("/*", (req, res) => {
         const initialState = store.getState()
         const initialStateHtml = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};</script>`
 
+        console.log("server's initialState", initialState)
+
         const InitialComponent = (
           <Provider store={store}>
             <RouterContext {...renderProps} />
