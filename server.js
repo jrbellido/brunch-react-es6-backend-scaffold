@@ -9,6 +9,7 @@ import { RouterContext, match } from "react-router"
 import { createLocation } from "history/lib/LocationUtils"
 import { createStore, combineReducers, applyMiddleware } from "redux"
 import { Provider } from "react-redux"
+
 import routes from "./app/routes"
 import fetchComponentData from "./app/lib/fetchComponentData"
 import Handlebars from "handlebars"
@@ -17,8 +18,8 @@ import promiseMiddleware from "./app/lib/promiseMiddleware"
 
 const app = express()
 
-app.set('view engine', 'hbs')
-app.set('views', fp.join(__dirname, 'templates'))
+app.set("view engine", "hbs")
+app.set("views", fp.join(__dirname, "templates"))
 
 app.engine('hbs', hbs.express4({
   //partialsDir: fp.join(__dirname, 'templates', 'partials')
@@ -47,18 +48,7 @@ app.use("/*", (req, res) => {
         const initialState = store.getState()
         const initialStateHtml = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};</script>`
 
-        console.log("server's initialState", initialState)
-
-        const InitialComponent = (
-          <Provider store={store}>
-            <RouterContext {...renderProps} />
-          </Provider>
-        )
-
-        const componentHTML = renderToString(InitialComponent)
-
         res.render('app', {
-          content: componentHTML,
           initialState: initialStateHtml
         })
       })

@@ -14,8 +14,6 @@ import routes from "./routes"
 
 const initialState = immutifyState(window.__INITIAL_STATE__)
 
-console.log("client's initialState", initialState)
-
 const reducer = combineReducers([ItemReducer])
 const store = applyMiddleware(promiseMiddleware)(createStore)(reducer, initialState)
 
