@@ -10,11 +10,9 @@ export default function ItemReducer(state = defaultState, action) {
     case 'CREATE_ITEM':
       console.log("ItemReducer; CREATE_ITEM;", action.res.status, action.res.data)
       return new Immutable.List(state).push(action.res.data)
-    case 'EDIT_ITEM':
-      return state.set(action.id, action.name, action.value)
     case 'DELETE_ITEM':
-      return new Immutable.List(state)
-      return new Immutable.List(state.filter( (item) => { item.id != 'dxxx' }))
+      console.log("ItemReducer; DELETE_ITEM;", action.res.status, action.res.data.id)
+      return new Immutable.List(state).filter( i => i.id != action.res.data.id )
     default:
       return state
   }

@@ -55,8 +55,6 @@ app.delete('/item/:id', function(req, res) {
 		var id = req.params.id;
 		var element = null;
 
-		console.log(id)
-
 		for (var i=0; i < db.length; i++) {
 			if (db[i].id != id)
 				output.push(db[i]);

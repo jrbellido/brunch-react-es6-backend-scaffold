@@ -63,7 +63,7 @@ class ItemManager extends Component {
       <div className="item-manager">
         <h3>Item Manager</h3>
 
-        <ItemList items={items}
+        <ItemList items={items} dispatch={dispatch}
             {...bindActionCreators(ItemActions, dispatch)} />
 
         <ItemForm 
