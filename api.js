@@ -1,6 +1,7 @@
 var express = require("express");
 var winston = require("winston");
 var md5 = require("md5");
+var bodyParser = require("body-parser");
 
 var app = express();
 
@@ -15,6 +16,10 @@ var db = [
 	{ id: 6, name: "item#6", value: 8.0 }
 ];
 
+var SERVER_LATENCY = 200
+
+app.use(bodyParser.json());
+
 // Allow CORS
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -22,24 +27,47 @@ app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Content-Type');
 
     next();
-})
+});
 
 app.get('/item', function(req, res) {
 	setTimeout(function() {
 		res.end(JSON.stringify(db));
-	}, 200);
+	}, SERVER_LATENCY);
 });
 
 app.post('/item', function(req, res) {
 	setTimeout(function() {
-		db.push({
-			id: md5(JSON.stringify(req.params) + new Date().getMilliseconds()), 
-			name: "Hello", 
-			value: 0.5 
-		})
+		var item = {
+			"id": md5(JSON.stringify(req.body) + new Date().getMilliseconds()),
+			"name": req.body.name,
+			"value": req.body.value
+		};
 
-		res.end(JSON.stringify(db));
-	}, 200);
+		db.push(item);
+
+		res.end(JSON.stringify(item));
+	}, SERVER_LATENCY);
+});
+
+app.delete('/item/:id', function(req, res) {
+	setTimeout(function() {
+		var output = []
+		var id = req.params.id;
+		var element = null;
+
+		console.log(id)
+
+		for (var i=0; i < db.length; i++) {
+			if (db[i].id != id)
+				output.push(db[i]);
+			else 
+				element = db[i];
+		}
+
+		db = output;
+
+		res.end(JSON.stringify(element));
+	}, SERVER_LATENCY);
 });
 
 var PORT = process.env.PORT || 3131;

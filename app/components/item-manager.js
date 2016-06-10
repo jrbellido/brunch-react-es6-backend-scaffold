@@ -36,7 +36,11 @@ class ItemManager extends Component {
   // Determines if methods `componentWillUpdate` and `componentDidUpdate` should be called
   shouldComponentUpdate() { return false }
 
-  componentWillReceiveProps() { console.log("ItemManager->componentWillReceiveProps()") }
+  componentWillReceiveProps() {
+    console.log("ItemManager->componentWillReceiveProps()", this)
+
+    this.forceUpdate()
+  }
 
   getInitialState() { console.log("ItemManager->getInitialState()") }
 

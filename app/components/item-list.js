@@ -1,11 +1,14 @@
 import React, { PropTypes } from "react"
+import { bindActionCreators } from "redux"
 import Immutable from "immutable"
+import * as ItemActions from "../actions/ItemActions"
 
 import Item from "./item"
 
 export default class ItemList extends React.Component {
   static propTypes = {
-    items: PropTypes.instanceOf(Immutable.List).isRequired
+    items: PropTypes.instanceOf(Immutable.List).isRequired,
+    dispatch: PropTypes.func.isRequired
   }
 
   render() {
@@ -17,7 +20,7 @@ export default class ItemList extends React.Component {
         <ul>
           {
             items.map((item, index) => {
-              return (<Item key={index} item={item} />)
+              return (<Item key={index} item={item} {...bindActionCreators(ItemActions, dispatch)} />)
             })
           }
         </ul>

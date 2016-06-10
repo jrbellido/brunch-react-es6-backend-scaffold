@@ -12,7 +12,17 @@ export function getItems() {
 export function createItem(name, value) {
   return {
     type: 'CREATE_ITEM',
-    promise: request.post(API_URL, { name, value })
+    promise: request.post(API_URL, {
+      "name": name,
+      "value": value
+    })
+  }
+}
+
+export function deleteItem(id) {
+  return {
+    type: 'DELETE_ITEM',
+    promise: request.delete(`${API_URL}/${id}`)
   }
 }
 
@@ -27,10 +37,4 @@ export function editItem(id, name, value) {
   }
 }
 
-export function deleteItem(id) {
-  return {
-    type: 'DELETE_ITEM',
-    id
-  }
-}
 */
