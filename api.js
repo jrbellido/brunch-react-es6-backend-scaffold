@@ -1,5 +1,6 @@
 var express = require("express");
 var winston = require("winston");
+var md5 = require("md5");
 
 var app = express();
 
@@ -26,13 +27,19 @@ app.use(function(req, res, next) {
 app.get('/item', function(req, res) {
 	setTimeout(function() {
 		res.end(JSON.stringify(db));
-	}, 300);
+	}, 200);
 });
 
 app.post('/item', function(req, res) {
 	setTimeout(function() {
-		res.end(JSON.stringify({}));
-	}, 300);
+		db.push({
+			id: md5(JSON.stringify(req.params) + new Date().getMilliseconds()), 
+			name: "Hello", 
+			value: 0.5 
+		})
+
+		res.end(JSON.stringify(db));
+	}, 200);
 });
 
 var PORT = process.env.PORT || 3131;

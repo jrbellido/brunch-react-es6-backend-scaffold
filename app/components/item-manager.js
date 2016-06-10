@@ -3,6 +3,8 @@ import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 import { withRouter } from "react-router"
 
+import console from "../lib/console"
+
 import * as ItemActions from "../actions/ItemActions"
 
 import ItemForm from "./item-form"
@@ -18,70 +20,40 @@ class ItemManager extends Component {
     ItemActions.getItems
   ]
 
-  getInitialState() {
-    console.log("ItemManager->getInitialState()")
-  }
-
-  getDefaultProps() {
-    console.log("ItemManager->getDefaultProps()")
-  }
-
-  componentWillMount() {
-    console.log("ItemManager->componentWillMount()")
-
-    //this.props.dispatch(ItemActions.getItems(), this.props)
-  }
-
   componentDidMount() {
     console.log("ItemManager->componentDidMount()")
 
     this.props.router.setRouteLeaveHook(this.props.route, this.routeWillLeave)
-
-    if (this.props.items.length == 0) {
-      //this.props.dispatch(ItemActions.getItems(), this.props)
-    }
   }
 
   routeWillLeave(nextLocation) {
-    console.groupCollapsed("ItemManager->routeWillLeave()")
-    console.dir(nextLocation)
-    console.groupEnd()
+    console.dump("ItemManager->routeWillLeave", nextLocation)
 
     // Uncomment to disallow route change
     //return false;
   }
 
-  componentWillReceiveProps() {
-    console.log("ItemManager->componentWillReceiveProps()")
-  }
-
   // Determines if methods `componentWillUpdate` and `componentDidUpdate` should be called
-  shouldComponentUpdate() {
-    return true
-  }
+  shouldComponentUpdate() { return false }
 
-  componentWillUpdate() {
-    console.log("ItemManager->componentWillUpdate()")
-  }
+  componentWillReceiveProps() { console.log("ItemManager->componentWillReceiveProps()") }
 
-  componentDidUpdate() {
-    console.log("ItemManager->componentDidUpdate()")
-  }
+  getInitialState() { console.log("ItemManager->getInitialState()") }
 
-  handleItemManager() {
-    console.log("Yay!")
-  }
+  getDefaultProps() { console.log("ItemManager->getDefaultProps()") }
 
-  componentWillUnmount() {
-    console.log("ItemManager->componentWillUnmount()") 
-  }
+  componentWillMount() { console.log("ItemManager->componentWillMount()") }
+
+  componentWillUpdate() { console.log("ItemManager->componentWillUpdate()") }
+
+  componentDidUpdate() { console.log("ItemManager->componentDidUpdate()") }
+
+  componentWillUnmount() { console.log("ItemManager->componentWillUnmount()") }
 
   render() {
     const { items, dispatch } = this.props
 
-    console.groupCollapsed('ItemManager->render()')
-    console.dir(this)
-    console.groupEnd()
+    console.dump("ItemManager->render", this)
 
     return (
       <div className="item-manager">

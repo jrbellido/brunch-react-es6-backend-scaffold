@@ -1,11 +1,14 @@
 import React from "react"
 import { render } from "react-dom"
-import { Router } from "react-router"
-import { browserHistory, RouterContext, match } from "react-router"
+import { Router, browserHistory, RouterContext, match } from "react-router"
 import { fromJS } from "immutable"
 import { Provider } from "react-redux"
 import { createStore, combineReducers, applyMiddleware }  from "redux"
 import assign from "object-assign"
+import console from "./lib/console"
+
+import * as ItemActions from "./actions/ItemActions"
+
 import ItemReducer from "./reducers/ItemReducer"
 import promiseMiddleware from "./lib/promiseMiddleware"
 import fetchComponentData from "./lib/fetchComponentData"
@@ -20,29 +23,23 @@ const reducer = combineReducers({
 
 const store = applyMiddleware(promiseMiddleware)(createStore)(reducer, initialState)
 
-browserHistory.listen(location => {
-	console.groupCollapsed("browserHistory->listen()")
-	console.dir(location)
-	console.groupEnd()
+browserHistory.listenBefore((location, callback) => {
+	console.dump("browserHistory.listenBefore", location, callback)
 
 	match({ routes, location }, (err, redirectLocation, renderProps) => {
-		console.groupCollapsed("react-router->match()")
-		console.dir(location)
-		console.dir(renderProps)
-		console.dir(initialState)
-		console.groupEnd()
+		console.dump("react-router->match", err, redirectLocation, renderProps)
 
 	    fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
-	    .then(() => {
-	    	const initialState = store.getState()
-
-			render(
-				<Provider store={store}>
-					<Router children={routes} history={browserHistory} />
-				</Provider>,
-				document.getElementById("root")
-			)
-	    })
-	    .catch(err => console.error(err.message))
+	    	.then(() => {
+		    	callback(initialState)
+	    	})
+	    	.catch(err => console.error(err.message))
 	})
 })
+
+render(
+	<Provider store={store}>
+		<Router children={routes} history={browserHistory} />
+	</Provider>,
+	document.getElementById("root")
+)

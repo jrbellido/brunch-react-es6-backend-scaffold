@@ -6,7 +6,13 @@ export default class Item extends React.Component {
   	const item = this.props.item
 
     return (
-      <li className="item"><span>{item.name}</span> <button>edit</button></li>
+      <li className="item">
+      	<span>{item.id}</span>
+      	<span>{item.name}</span>
+      	&mdash;
+      	<span>{item.value}</span>
+      	<button>edit</button>
+      </li>
     )
   }
 }

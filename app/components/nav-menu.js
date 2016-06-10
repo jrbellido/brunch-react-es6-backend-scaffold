@@ -12,10 +12,6 @@ export default class NavMenu extends React.Component {
 					<li><Link to={`/`}>Home</Link></li>
 					<li><Link to={`/about`}>About</Link></li>
 				</ul>
-
-				<select>
-					<option>Account</option>
-				</select>
 			</div>
 		)
 	}

@@ -39,9 +39,7 @@ export default class About extends React.Component {
   }
 
   render() {
-    console.groupCollapsed("About->render()")
-  	console.dir(this)
-    console.groupEnd()
+    console.dump("About->render", this)
 
     return (
       <div id="about">
