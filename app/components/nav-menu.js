@@ -1,10 +1,10 @@
-import React, { PropTypes } from "react"
+import React, { PropTypes, Component } from "react"
 import { Link } from "react-router"
 
 if (typeof window !== 'undefined')
 	require("../styles/nav-menu.scss")
 
-export default class NavMenu extends React.Component {
+export default class NavMenu extends Component {
 	render() {
 		return (
 			<div>

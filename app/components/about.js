@@ -3,23 +3,23 @@ import React, { PropTypes } from "react"
 export default class About extends React.Component {
 
   getInitialState() {
-    console.log("About->getInitialState()")
+    console.log("About->getInitialState")
   }
 
   getDefaultProps() {
-    console.log("About->getDefaultProps()")
+    console.log("About->getDefaultProps")
   }
 
   componentWillMount() {
-    console.log("About->componentWillMount()") 
+    console.log("About->componentWillMount") 
   }
 
   componentDidMount() {
-    console.log("About->componentDidMount()")
+    console.log("About->componentDidMount")
   }
 
   componentWillReceiveProps() {
-    console.log("About->componentWillReceiveProps()")
+    console.log("About->componentWillReceiveProps")
   }
 
   shouldComponentUpdate() {
@@ -27,15 +27,15 @@ export default class About extends React.Component {
   }
 
   componentWillUpdate() {
-    console.log("About->componentWillUpdate()")
+    console.log("About->componentWillUpdate")
   }
 
   componentDidUpdate() {
-    console.log("About->componentDidUpdate()")
+    console.log("About->componentDidUpdate")
   }
 
   componentWillUnmount() {
-   console.log("About->componentWillUnmount()")
+   console.log("About->componentWillUnmount")
   }
 
   render() {

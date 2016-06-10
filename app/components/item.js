@@ -1,4 +1,4 @@
-import React, { PropTypes } from "react";
+import React, { PropTypes, Component } from "react";
 import Immutable from "immutable"
 
 import * as ItemActions from "../actions/ItemActions"
@@ -6,7 +6,7 @@ import * as ItemActions from "../actions/ItemActions"
 if (typeof window !== 'undefined')
   require("../styles/item.scss")
 
-export default class Item extends React.Component {
+export default class Item extends Component {
   static propTypes = {
     item: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired
@@ -20,13 +20,10 @@ export default class Item extends React.Component {
     console.dump("Item->handleRemove", this, ev, id)
 
     this.props.deleteItem(id)
-    
-    //this.props.dispatch(ItemActions.deleteItem(id))
-
-    //ItemActions.deleteItem(id)
-
     ev.preventDefault()
   }
+
+  componentWillUnmount() { console.log("Item->componentWillUnmount") }
 
   render() {
     console.dump("Item->render", this)

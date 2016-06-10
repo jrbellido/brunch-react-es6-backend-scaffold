@@ -21,7 +21,7 @@ class ItemManager extends Component {
   ]
 
   componentDidMount() {
-    console.log("ItemManager->componentDidMount()")
+    console.log("ItemManager->componentDidMount")
 
     this.props.router.setRouteLeaveHook(this.props.route, this.routeWillLeave)
   }
@@ -37,22 +37,22 @@ class ItemManager extends Component {
   shouldComponentUpdate() { return false }
 
   componentWillReceiveProps() {
-    console.log("ItemManager->componentWillReceiveProps()", this)
+    console.dump("ItemManager->componentWillReceiveProps", this)
 
     this.forceUpdate()
   }
 
-  getInitialState() { console.log("ItemManager->getInitialState()") }
+  getInitialState() { console.log("ItemManager->getInitialState") }
 
-  getDefaultProps() { console.log("ItemManager->getDefaultProps()") }
+  getDefaultProps() { console.log("ItemManager->getDefaultProps") }
 
-  componentWillMount() { console.log("ItemManager->componentWillMount()") }
+  componentWillMount() { console.log("ItemManager->componentWillMount") }
 
-  componentWillUpdate() { console.log("ItemManager->componentWillUpdate()") }
+  componentWillUpdate() { console.log("ItemManager->componentWillUpdate") }
 
-  componentDidUpdate() { console.log("ItemManager->componentDidUpdate()") }
+  componentDidUpdate() { console.log("ItemManager->componentDidUpdate") }
 
-  componentWillUnmount() { console.log("ItemManager->componentWillUnmount()") }
+  componentWillUnmount() { console.log("ItemManager->componentWillUnmount") }
 
   render() {
     const { items, dispatch } = this.props

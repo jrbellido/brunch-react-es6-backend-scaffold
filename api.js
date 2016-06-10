@@ -30,12 +30,16 @@ app.use(function(req, res, next) {
 });
 
 app.get('/item', function(req, res) {
+	console.log(`[GET] /item`);
+
 	setTimeout(function() {
 		res.end(JSON.stringify(db));
 	}, SERVER_LATENCY);
 });
 
 app.post('/item', function(req, res) {
+	console.log(`[POST] /item`);
+
 	setTimeout(function() {
 		var item = {
 			"id": md5(JSON.stringify(req.body) + new Date().getMilliseconds()),
@@ -50,6 +54,8 @@ app.post('/item', function(req, res) {
 });
 
 app.delete('/item/:id', function(req, res) {
+	console.log(`[DELETE] /item/${req.params.id}`);
+
 	setTimeout(function() {
 		var output = []
 		var id = req.params.id;

@@ -43,18 +43,8 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract("css!sass")
+        loader: ExtractTextPlugin.extract("css!autoprefixer!sass")
       }
-      /*,
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader"),
-        include: [fp.join(__dirname, "app", "styles")]
-      },
-      {
-        text: /\.css$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader")
-      }*/
     ]
   },
   resolve: {
