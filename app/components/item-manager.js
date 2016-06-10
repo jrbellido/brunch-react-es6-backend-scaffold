@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from "react"
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
-
-import Immutable from "immutable"
+import { withRouter } from "react-router"
 
 import * as ItemActions from "../actions/ItemActions"
 
@@ -28,19 +27,35 @@ class ItemManager extends Component {
   }
 
   componentWillMount() {
-    console.log("ItemManager->componentWillMount()") 
+    console.log("ItemManager->componentWillMount()")
 
-    //this.props.items = Immutable.List([Immutable.Map({id: 1, name: "item#1", value: 5.1})])
+    //this.props.dispatch(ItemActions.getItems(), this.props)
   }
 
   componentDidMount() {
     console.log("ItemManager->componentDidMount()")
+
+    this.props.router.setRouteLeaveHook(this.props.route, this.routeWillLeave)
+
+    if (this.props.items.length == 0) {
+      //this.props.dispatch(ItemActions.getItems(), this.props)
+    }
+  }
+
+  routeWillLeave(nextLocation) {
+    console.groupCollapsed("ItemManager->routeWillLeave()")
+    console.dir(nextLocation)
+    console.groupEnd()
+
+    // Uncomment to disallow route change
+    //return false;
   }
 
   componentWillReceiveProps() {
     console.log("ItemManager->componentWillReceiveProps()")
   }
 
+  // Determines if methods `componentWillUpdate` and `componentDidUpdate` should be called
   shouldComponentUpdate() {
     return true
   }
@@ -53,16 +68,20 @@ class ItemManager extends Component {
     console.log("ItemManager->componentDidUpdate()")
   }
 
+  handleItemManager() {
+    console.log("Yay!")
+  }
+
   componentWillUnmount() {
-   console.log("ItemManager->componentWillUnmount()") 
+    console.log("ItemManager->componentWillUnmount()") 
   }
 
   render() {
-    console.log("ItemManager->render()")
+    const { items, dispatch } = this.props
 
-    const dispatch = this.props.dispatch
-    const items = this.props.items
-
+    console.groupCollapsed('ItemManager->render()')
+    console.dir(this)
+    console.groupEnd()
 
     return (
       <div className="item-manager">
@@ -78,4 +97,4 @@ class ItemManager extends Component {
   }
 }
 
-export default connect(state => ({ items: state[0] }))(ItemManager)
+export default connect(state => (state))(withRouter(ItemManager))

@@ -14,8 +14,8 @@ class NoMatch extends React.Component {
 
 export default (
   <Route name="app" component={AppLayout} path="/">
-  	<IndexRoute component={ItemManager}/>
-  	<Route path="about" component={About}/>
+  	<IndexRoute component={ItemManager} />
+  	<Route path="about" component={About} />
   	<Route path="*" component={NoMatch}/>
   </Route>
 )

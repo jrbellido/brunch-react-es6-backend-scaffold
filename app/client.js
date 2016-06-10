@@ -8,43 +8,41 @@ import { createStore, combineReducers, applyMiddleware }  from "redux"
 import assign from "object-assign"
 import ItemReducer from "./reducers/ItemReducer"
 import promiseMiddleware from "./lib/promiseMiddleware"
-import immutifyState from "./lib/immutifyState"
 import fetchComponentData from "./lib/fetchComponentData"
 
 import routes from "./routes"
 
-const initialState = immutifyState(window.__INITIAL_STATE__)
+const initialState = window.__INITIAL_STATE__
 
-const reducer = combineReducers([ItemReducer])
+const reducer = combineReducers({
+	items: ItemReducer
+})
+
 const store = applyMiddleware(promiseMiddleware)(createStore)(reducer, initialState)
 
 browserHistory.listen(location => {
+	console.groupCollapsed("browserHistory->listen()")
+	console.dir(location)
+	console.groupEnd()
+
 	match({ routes, location }, (err, redirectLocation, renderProps) => {
-		/*
-		if (err) { 
-			console.error(err)
-	    	//return res.status(500).render('500')
-	    }
-	    
-	    if (!renderProps) {
-	    	console.log('404')
-	    	//return res.status(404).render('404')
-	    }
+		console.groupCollapsed("react-router->match()")
+		console.dir(location)
+		console.dir(renderProps)
+		console.dir(initialState)
+		console.groupEnd()
 
 	    fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
 	    .then(() => {
 	    	const initialState = store.getState()
 
-	    	console.log("fetched data")
+			render(
+				<Provider store={store}>
+					<Router children={routes} history={browserHistory} />
+				</Provider>,
+				document.getElementById("root")
+			)
 	    })
-	    .catch(err => res.end(err.message))
-	    */
+	    .catch(err => console.error(err.message))
 	})
 })
-
-render(
-	<Provider store={store}>
-		<Router children={routes} history={browserHistory} />
-	</Provider>,
-	document.getElementById("root")
-	)

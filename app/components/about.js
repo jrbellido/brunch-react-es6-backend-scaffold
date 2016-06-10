@@ -35,10 +35,14 @@ export default class About extends React.Component {
   }
 
   componentWillUnmount() {
-   console.log("About->componentWillUnmount()") 
+   console.log("About->componentWillUnmount()")
   }
 
   render() {
+    console.groupCollapsed("About->render()")
+  	console.dir(this)
+    console.groupEnd()
+
     return (
       <div id="about">
         <h2>About this</h2>

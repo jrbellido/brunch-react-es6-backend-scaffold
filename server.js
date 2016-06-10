@@ -31,7 +31,9 @@ app.use(express.static('public'))
 
 app.use("/*", (req, res) => {
   const location = createLocation(req.originalUrl)
-  const reducer = combineReducers([ItemReducer])
+  const reducer = combineReducers({
+    items: ItemReducer
+  })
   const store = applyMiddleware(promiseMiddleware)(createStore)(reducer)
 
   match({ routes, location }, (err, redirectLocation, renderProps) => {
@@ -39,9 +41,6 @@ app.use("/*", (req, res) => {
       console.log(err)
       return res.status(500).render('500')
     }
-    
-    if (!renderProps)
-    	return res.status(404).render('404')
 
     fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
       .then(() => {
