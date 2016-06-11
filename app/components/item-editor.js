@@ -12,7 +12,7 @@ import ItemList from "./item-list"
 
 class ItemEditor extends Component {
   static propTypes = {
-    item: PropTypes.any.isRequired,
+    item: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired
   }
 
@@ -53,14 +53,20 @@ class ItemEditor extends Component {
 
     const { item, dispatch } = this.props
 
+    console.log("---", this.props.item)
+
     return (
       <div className="item-editor">
         <div><Link to={`/`}>Return to list</Link></div>
         <h3>Item edit</h3>
 
         <form ref="itemEditForm">
-          <input name="name" type="text" placeholder="Name" />
-          <input name="value" type="text" placeholder="Value" />
+          <div>
+            <input name="name" type="text" placeholder="Name" />
+          </div>
+          <div>
+            <input name="value" type="text" placeholder="Value" />
+          </div>
 
           <input type="submit" value="Save" />
         </form>

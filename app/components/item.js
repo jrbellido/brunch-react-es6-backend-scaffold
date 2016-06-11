@@ -4,9 +4,6 @@ import Immutable from "immutable"
 
 import * as ItemActions from "../actions/ItemActions"
 
-if (typeof window !== 'undefined')
-  require("../styles/item.scss")
-
 export default class Item extends Component {
   static propTypes = {
     item: PropTypes.object.isRequired,
@@ -33,7 +30,7 @@ export default class Item extends Component {
           <span><Link to={`/item/${item.id}`}>{item.name}</Link></span>
           <span><label>Value:</label> {item.value}</span>
           <span>
-            <button onClick={(e) => this.handleRemove(e, item.id)}>Remove</button>
+            <button onClick={(e) => this.handleRemove(e, item.id)}><i className="fa fa-trash" /></button>
           </span>
         </div>
       </li>

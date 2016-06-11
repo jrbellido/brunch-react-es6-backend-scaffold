@@ -2,9 +2,6 @@ import React, { PropTypes, Component } from "react"
 import NavMenu from "./nav-menu"
 import Footer from "./footer"
 
-if (typeof window !== 'undefined')
-  require("../styles/app-layout.scss")
-
 export default class AppLayout extends Component {
   static propTypes = {
     children: PropTypes.object

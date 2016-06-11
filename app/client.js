@@ -15,6 +15,9 @@ import fetchComponentData from "./lib/fetchComponentData"
 
 import routes from "./routes"
 
+if (typeof window !== 'undefined')
+  require("./styles/app.scss")
+
 const initialState = window.__INITIAL_STATE__
 
 const reducer = combineReducers(appReducers)

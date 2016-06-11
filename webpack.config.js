@@ -1,6 +1,7 @@
-var fp = require('path')
+var fp = require("path")
 var webpack = require("webpack");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var config = require("./config")(process.argv);
 
 //var lessExtract = new ExtractTextPlugin(fp.join(__dirname, "public", "styles-[name].[chunkhash].css"));
 
@@ -17,7 +18,7 @@ module.exports = {
   },
   output: {
     path: __dirname + "/public/assets/",
-    publicPath: "/assets/",
+    publicPath: config.server.assetPath,
     filename: "[name].js"
   },
   plugins: [
@@ -34,12 +35,17 @@ module.exports = {
       { 
         test: /\.jsx?$/,
         loader: "babel", 
-        exclude: /(node_modules|bower_components)/, 
+        exclude: /node_modules/, 
         query: {
           presets: ["es2015", "es2016", "react"],
           plugins: ["transform-decorators-legacy", "transform-class-properties", "transform-object-rest-spread"],
           cacheDirectory: true
         }
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|eot|woff2|woff|ttf)(\?.*)?$/,
+        loader: "file",
+        include: /(node_modules)/
       },
       {
         test: /\.scss$/,
@@ -48,6 +54,6 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['', '.js'],
+    extensions: ["", ".js"],
   },
 };

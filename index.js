@@ -2,10 +2,9 @@
 
 require('babel-register')({});
 
-var server = require('./server').default;
+var config = require("./config")(process.argv);
+var server = require("./server").default; // TODO: ES6 conversion results in a default attribute
 
-var PORT = process.env.PORT || 3000;
-
-server.listen(PORT, function() {
-  console.log('Server listening on', PORT);
+server(config).listen(config.server.port, config.server.host, function() {
+  console.log('Server listening on %s:%s', config.server.host, config.server.port);
 });

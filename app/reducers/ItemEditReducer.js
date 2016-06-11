@@ -8,7 +8,7 @@ export default function ItemEditReducer(state = defaultState, action) {
   switch(action.type) {
     case 'GET_ITEM':
       console.dump("ItemReducer; GET_ITEM", action.res.status, action.res.statusText)
-      return new Immutable.Map(action.res.data)
+      return action.res.data
     default:
       return state
   }

@@ -1,13 +1,8 @@
 import React, { Component } from "react"
-
-import Item from "./item"
-
 import console from "../lib/console"
-
 import * as ItemActions from "../actions/ItemActions"
 
-if (typeof window !== 'undefined')
-	require("../styles/item-form.scss")
+import Item from "./item"
 
 export default class ItemForm extends Component {
   constructor(props) {

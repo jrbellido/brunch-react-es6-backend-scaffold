@@ -1,0 +1,20 @@
+$fa-font-path: "../../node_modules/font-awesome/fonts";
+@import "../../node_modules/font-awesome/scss/font-awesome";
+
+@import "./_footer";
+@import "./_item_manager";
+
+#app {
+	//background-image: url("../resources/image.png");
+
+	font-family: sans-serif;
+	color: #333;
+
+	h1,	h2,	h3,	h4,	h5,	h6 {
+		font-size: 100%;
+	}
+	
+	a {
+		color: #3273CB;
+	}
+}

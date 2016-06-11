@@ -16,41 +16,57 @@ import fetchComponentData from "./app/lib/fetchComponentData"
 import appReducers from "./app/reducers"
 import promiseMiddleware from "./app/lib/promiseMiddleware"
 
-const app = express()
+const appServer = function(config) {
+  const app = express()
 
-app.set("view engine", "hbs")
-app.set("views", fp.join(__dirname, "templates"))
+  app.set("view engine", "hbs")
+  app.set("views", fp.join(__dirname, "templates"))
 
-app.engine('hbs', hbs.express4({
-  //partialsDir: fp.join(__dirname, 'templates', 'partials')
-}))
+  app.engine('hbs', hbs.express4({
+    //partialsDir: fp.join(__dirname, 'templates', 'partials')
+  }))
 
-app.use(favicon(fp.join(__dirname, "public", "favicon.png")))
+  if (config.development) {
+    // Allow CORS
+    app.use(function(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+        res.header("Access-Control-Allow-Headers", "Content-Type");
 
-app.use(express.static('public'))
+        next();
+    });
+  }
 
-app.use("/*", (req, res) => {
-  const location = createLocation(req.originalUrl)
-  const reducer = combineReducers(appReducers)
-  const store = applyMiddleware(promiseMiddleware)(createStore)(reducer)
+  app.use(favicon(fp.join(__dirname, "public", "favicon.png")))
 
-  match({ routes, location }, (err, redirectLocation, renderProps) => {
-    if (err) { 
-      console.log(err)
-      return res.status(500).render('500')
-    }
+  app.use(express.static('public'))
 
-    fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
-      .then(() => {
-        const initialState = store.getState()
-        const initialStateHtml = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};</script>`
+  app.use("/*", (req, res) => {
+    const location = createLocation(req.originalUrl)
+    const reducer = combineReducers(appReducers)
+    const store = applyMiddleware(promiseMiddleware)(createStore)(reducer)
 
-        res.render('app', {
-          initialState: initialStateHtml
+    match({ routes, location }, (err, redirectLocation, renderProps) => {
+      if (err) { 
+        console.log(err)
+        return res.status(500).render('500')
+      }
+
+      fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
+        .then(() => {
+          const initialState = store.getState()
+          const initialStateHtml = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};</script>`
+
+          res.render('app', {
+            initialState: initialStateHtml
+          })
         })
-      })
-      .catch(err => res.end(err.message))
+        .catch(err => res.end(err.message))
+    })
   })
-})
 
-export default app
+  return app
+
+}
+
+export default appServer
