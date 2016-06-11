@@ -10,24 +10,24 @@ import * as ItemActions from "../actions/ItemActions"
 import ItemForm from "./item-form"
 import ItemList from "./item-list"
 
-class ItemManager extends Component {
+class ItemEditor extends Component {
   static propTypes = {
     items: PropTypes.any.isRequired,
     dispatch: PropTypes.func.isRequired
   }
 
   static needs = [
-    ItemActions.getItems
+    ItemActions.getItem
   ]
 
   componentDidMount() {
-    console.log("ItemManager->componentDidMount")
+    console.log("ItemEditor->componentDidMount")
 
     this.props.router.setRouteLeaveHook(this.props.route, this.routeWillLeave)
   }
 
   routeWillLeave(nextLocation) {
-    console.dump("ItemManager->routeWillLeave", nextLocation)
+    console.dump("ItemEditor->routeWillLeave", nextLocation)
 
     // Uncomment to disallow route change
     //return false;
@@ -37,37 +37,34 @@ class ItemManager extends Component {
   shouldComponentUpdate() { return false }
 
   componentWillReceiveProps() {
-    console.dump("ItemManager->componentWillReceiveProps", this)
+    console.dump("ItemEditor->componentWillReceiveProps", this)
 
     this.forceUpdate()
   }
 
-  getInitialState() { console.log("ItemManager->getInitialState") }
+  getInitialState() { console.log("ItemEditor->getInitialState") }
 
-  getDefaultProps() { console.log("ItemManager->getDefaultProps") }
+  getDefaultProps() { console.log("ItemEditor->getDefaultProps") }
 
-  componentWillMount() { console.log("ItemManager->componentWillMount") }
+  componentWillMount() { console.log("ItemEditor->componentWillMount") }
 
-  componentWillUpdate() { console.log("ItemManager->componentWillUpdate") }
+  componentWillUpdate() { console.log("ItemEditor->componentWillUpdate") }
 
-  componentDidUpdate() { console.log("ItemManager->componentDidUpdate") }
+  componentDidUpdate() { console.log("ItemEditor->componentDidUpdate") }
 
-  componentWillUnmount() { console.log("ItemManager->componentWillUnmount") }
+  componentWillUnmount() { console.log("ItemEditor->componentWillUnmount") }
 
   render() {
     const { items, dispatch } = this.props
 
-    console.dump("ItemManager->render", this)
+    console.dump("ItemEditor->render", this)
 
     return (
-      <div className="item-manager">
-        <h3>Item Manager</h3>
-
-        <ItemList items={items} dispatch={dispatch}
-            {...bindActionCreators(ItemActions, dispatch)} />
+      <div className="item-editor">
+        <h3>Item edit</h3>
       </div>
     )
   }
 }
 
-export default connect(state => (state))(withRouter(ItemManager))
+export default connect(state => (state))(withRouter(ItemEditor))

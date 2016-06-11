@@ -19,6 +19,13 @@ export function createItem(name, value) {
   }
 }
 
+export function getItem(id) {
+  return {
+    type: 'GET_ITEM',
+    promise: request.get(`${API_URL}/item/${id}`)
+  }
+}
+
 export function deleteItem(id) {
   return {
     type: 'DELETE_ITEM',
@@ -36,5 +43,4 @@ export function editItem(id, name, value) {
     value
   }
 }
-
 */

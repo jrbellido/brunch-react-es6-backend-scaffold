@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from "react";
+import React, { PropTypes, Component } from "react"
+import { Link } from "react-router"
 import Immutable from "immutable"
 
 import * as ItemActions from "../actions/ItemActions"
@@ -33,7 +34,7 @@ export default class Item extends Component {
     return (
       <li className="item" key={item.id} ref="activeItem">
       	<div>
-          <span><label>Name:</label> {item.name}</span>
+          <span><Link>{item.name}</Link></span>
           <span><label>Value:</label> {item.value}</span>
           <span>
             <button onClick={(e) => this.handleRemove(e, item.id)}>Remove</button>

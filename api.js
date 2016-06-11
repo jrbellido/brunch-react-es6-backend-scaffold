@@ -22,14 +22,14 @@ app.use(bodyParser.json());
 
 // Allow CORS
 app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+    res.header("Access-Control-Allow-Headers", "Content-Type");
 
     next();
 });
 
-app.get('/item', function(req, res) {
+app.get("/item", function(req, res) {
 	console.log(`[GET] /item`);
 
 	setTimeout(function() {
@@ -37,7 +37,25 @@ app.get('/item', function(req, res) {
 	}, SERVER_LATENCY);
 });
 
-app.post('/item', function(req, res) {
+app.get("/item/:id", function(req,res) {
+	console.log(`[GET] /item/:id`);
+
+	setTimeout(function() {
+		var item = null;
+		var id = req.params.id;
+
+		for (var i=0; i < db.length; i++) {
+			if (db[i].id == id) {
+				item = db[i];
+				break;
+			}
+		}
+
+		res.end(JSON.stringify(item));
+	}, SERVER_LATENCY);
+});
+
+app.post("/item", function(req, res) {
 	console.log(`[POST] /item`);
 
 	setTimeout(function() {
@@ -53,7 +71,7 @@ app.post('/item', function(req, res) {
 	}, SERVER_LATENCY);
 });
 
-app.delete('/item/:id', function(req, res) {
+app.delete("/item/:id", function(req, res) {
 	console.log(`[DELETE] /item/${req.params.id}`);
 
 	setTimeout(function() {
@@ -77,5 +95,5 @@ app.delete('/item/:id', function(req, res) {
 var PORT = process.env.PORT || 3131;
 
 app.listen(PORT, function() {
-  console.log('API listening on port ', PORT);
+  console.log("API listening on port", PORT);
 });
