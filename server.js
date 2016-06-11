@@ -13,7 +13,7 @@ import { Provider } from "react-redux"
 
 import routes from "./app/routes"
 import fetchComponentData from "./app/lib/fetchComponentData"
-import ItemReducer from "./app/reducers/ItemReducer"
+import appReducers from "./app/reducers"
 import promiseMiddleware from "./app/lib/promiseMiddleware"
 
 const app = express()
@@ -31,9 +31,7 @@ app.use(express.static('public'))
 
 app.use("/*", (req, res) => {
   const location = createLocation(req.originalUrl)
-  const reducer = combineReducers({
-    items: ItemReducer
-  })
+  const reducer = combineReducers(appReducers)
   const store = applyMiddleware(promiseMiddleware)(createStore)(reducer)
 
   match({ routes, location }, (err, redirectLocation, renderProps) => {

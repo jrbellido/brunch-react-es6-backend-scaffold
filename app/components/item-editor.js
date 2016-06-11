@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from "react"
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
-import { withRouter } from "react-router"
+import { withRouter, Link } from "react-router"
 
 import console from "../lib/console"
 
@@ -12,7 +12,7 @@ import ItemList from "./item-list"
 
 class ItemEditor extends Component {
   static propTypes = {
-    items: PropTypes.any.isRequired,
+    item: PropTypes.any.isRequired,
     dispatch: PropTypes.func.isRequired
   }
 
@@ -20,33 +20,27 @@ class ItemEditor extends Component {
     ItemActions.getItem
   ]
 
-  componentDidMount() {
-    console.log("ItemEditor->componentDidMount")
+  componentDidMount() { 
+    console.dump("ItemEditor->componentDidMount", this)
 
-    this.props.router.setRouteLeaveHook(this.props.route, this.routeWillLeave)
+    const form = this.refs.itemEditForm
+
+    form.name.value = this.props.item.name
+    form.value.value = this.props.item.value
   }
 
-  routeWillLeave(nextLocation) {
-    console.dump("ItemEditor->routeWillLeave", nextLocation)
-
-    // Uncomment to disallow route change
-    //return false;
-  }
+  routeWillLeave(nextLocation) { console.dump("ItemEditor->routeWillLeave", nextLocation) }
 
   // Determines if methods `componentWillUpdate` and `componentDidUpdate` should be called
   shouldComponentUpdate() { return false }
 
-  componentWillReceiveProps() {
-    console.dump("ItemEditor->componentWillReceiveProps", this)
-
-    this.forceUpdate()
-  }
+  componentWillReceiveProps() { console.dump("ItemEditor->componentWillReceiveProps", this) }
 
   getInitialState() { console.log("ItemEditor->getInitialState") }
 
   getDefaultProps() { console.log("ItemEditor->getDefaultProps") }
 
-  componentWillMount() { console.log("ItemEditor->componentWillMount") }
+  componentWillMount() {console.dump("ItemEditor->componentWillMount", this) }
 
   componentWillUpdate() { console.log("ItemEditor->componentWillUpdate") }
 
@@ -55,13 +49,21 @@ class ItemEditor extends Component {
   componentWillUnmount() { console.log("ItemEditor->componentWillUnmount") }
 
   render() {
-    const { items, dispatch } = this.props
-
     console.dump("ItemEditor->render", this)
+
+    const { item, dispatch } = this.props
 
     return (
       <div className="item-editor">
+        <div><Link to={`/`}>Return to list</Link></div>
         <h3>Item edit</h3>
+
+        <form ref="itemEditForm">
+          <input name="name" type="text" placeholder="Name" />
+          <input name="value" type="text" placeholder="Value" />
+
+          <input type="submit" value="Save" />
+        </form>
       </div>
     )
   }

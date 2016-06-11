@@ -34,7 +34,7 @@ class ItemManager extends Component {
   }
 
   // Determines if methods `componentWillUpdate` and `componentDidUpdate` should be called
-  shouldComponentUpdate() { return false }
+  // shouldComponentUpdate() { return false }
 
   componentWillReceiveProps() {
     console.dump("ItemManager->componentWillReceiveProps", this)
@@ -61,7 +61,7 @@ class ItemManager extends Component {
 
     return (
       <div className="item-manager">
-        <h3>Item Manager</h3>
+        <h3>Item manager</h3>
 
         <ItemList items={items} dispatch={dispatch}
             {...bindActionCreators(ItemActions, dispatch)} />

@@ -22,7 +22,6 @@ export default class ItemList extends Component {
 
     return (
       <div className="item-list">
-        <h2>Item List</h2>
         <ul>
           {
             items.map((item, index) => {

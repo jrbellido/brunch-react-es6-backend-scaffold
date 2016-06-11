@@ -9,7 +9,7 @@ import console from "./lib/console"
 
 import * as ItemActions from "./actions/ItemActions"
 
-import ItemReducer from "./reducers/ItemReducer"
+import appReducers from "./reducers"
 import promiseMiddleware from "./lib/promiseMiddleware"
 import fetchComponentData from "./lib/fetchComponentData"
 
@@ -17,9 +17,7 @@ import routes from "./routes"
 
 const initialState = window.__INITIAL_STATE__
 
-const reducer = combineReducers({
-	items: ItemReducer
-})
+const reducer = combineReducers(appReducers)
 
 const store = applyMiddleware(promiseMiddleware)(createStore)(reducer, initialState)
 
@@ -31,7 +29,7 @@ browserHistory.listenBefore((location, callback) => {
 
 	    fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
 	    	.then(() => {
-		    	callback(initialState)
+		    	callback()
 	    	})
 	    	.catch(err => console.error(err.message))
 	})

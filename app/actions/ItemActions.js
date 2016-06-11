@@ -19,10 +19,10 @@ export function createItem(name, value) {
   }
 }
 
-export function getItem(id) {
+export function getItem(params) {
   return {
     type: 'GET_ITEM',
-    promise: request.get(`${API_URL}/item/${id}`)
+    promise: request.get(`${API_URL}/${params.id}`)
   }
 }
 

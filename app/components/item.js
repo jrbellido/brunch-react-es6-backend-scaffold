@@ -24,17 +24,13 @@ export default class Item extends Component {
     ev.preventDefault()
   }
 
-  componentWillUnmount() { console.log("Item->componentWillUnmount") }
-
   render() {
-    console.dump("Item->render", this)
-
   	const { item, dispatch } = this.props
 
     return (
       <li className="item" key={item.id} ref="activeItem">
       	<div>
-          <span><Link>{item.name}</Link></span>
+          <span><Link to={`/item/${item.id}`}>{item.name}</Link></span>
           <span><label>Value:</label> {item.value}</span>
           <span>
             <button onClick={(e) => this.handleRemove(e, item.id)}>Remove</button>
