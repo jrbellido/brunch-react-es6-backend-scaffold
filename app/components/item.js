@@ -25,15 +25,11 @@ export default class Item extends Component {
   	const { item, dispatch } = this.props
 
     return (
-      <li className="item" key={item.id} ref="activeItem">
-      	<div>
-          <span><Link to={`/item/${item.id}`}>{item.name}</Link></span>
-          <span><label>Value:</label> {item.value}</span>
-          <span class="component">
-            <button className="btn btn-default btn-xs" onClick={(e) => this.handleRemove(e, item.id)}><i className="fa fa-trash" /></button>
-          </span>
-        </div>
-      </li>
+      <tr className="item" key={item.id} ref="activeItem">
+        <td><span><Link to={`/item/${item.id}`}>{item.name}</Link></span></td>
+        <td><span>{item.value}</span></td>
+        <td><button className="btn btn-default btn-xs" onClick={(e) => this.handleRemove(e, item.id)}><i className="fa fa-trash" /></button></td>
+      </tr>
     )
   }
 }

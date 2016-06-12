@@ -30,7 +30,7 @@ var db = [{
     value: '7827.93'
 }];
 
-var SERVER_LATENCY = 100
+var SERVER_LATENCY = 20
 
 app.use(bodyParser.json());
 

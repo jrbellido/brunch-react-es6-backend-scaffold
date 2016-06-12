@@ -7,7 +7,7 @@ import console from "../lib/console"
 
 import * as ItemActions from "../actions/ItemActions"
 
-import ItemForm from "./item-form"
+import ItemNew from "./item-new"
 import ItemList from "./item-list"
 
 class ItemManager extends Component {
@@ -67,7 +67,7 @@ class ItemManager extends Component {
 
         <h3>Item manager</h3>
 
-        <Link to={`/item/new`}>New</Link>
+        <Link className="btn btn-primary" to={`/item/new`}>New</Link>
 
         <ItemList items={items} dispatch={dispatch}
             {...bindActionCreators(ItemActions, dispatch)} />

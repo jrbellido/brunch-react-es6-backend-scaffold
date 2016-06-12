@@ -21,15 +21,22 @@ export default class ItemList extends Component {
   	const { items, dispatch } = this.props
 
     return (
-      <div className="item-list">
-        <ul>
+      <table className="item-list table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Value</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
           {
             items.map((item, index) => {
               return (<Item key={index} item={item} dispatch={dispatch} {...bindActionCreators(ItemActions, dispatch)} />)
             })
           }
-        </ul>
-      </div>
+        </tbody>
+      </table>
     )
   }
 }

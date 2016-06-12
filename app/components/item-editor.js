@@ -6,7 +6,6 @@ import console from "../lib/console"
 
 import * as ItemActions from "../actions/ItemActions"
 
-import ItemForm from "./item-form"
 import ItemList from "./item-list"
 
 class ItemEditor extends Component {

@@ -2,47 +2,45 @@ import React, { PropTypes, Component } from "react"
 import { withRouter, Link } from "react-router"
 import { connect } from "react-redux"
 
-class NavMenuItemClass extends Component {
+class NavMenuItem extends Component {
 	constructor(props) {
 		super(props)
+		this.state = { className: "" }
+		//this.state = { className: this.props.router.isActive(this.props.to)?"active":"" }
+	}
 
-		this.state = {
-			"className": ""
+	updateActive(context) {
+		return function(loc) {
+			context.setState({ className: loc.pathname == context.props.to ? "active" : "" })
 		}
 	}
 
-	componentWillMount() {
+	componentDidMount() {
+		this.props.router.registerTransitionHook(this.updateActive(this))
 	}
 
-	componentWillUpdate() {
+	componentDidUnmount() {
+		this.props.router.unregisterTransitionHook()	
 	}
 
 	render() {
-		console.dump("NavMenuItem->render", this)
-
-		const className = this.props.router.isActive(this.props.to)?"active":""
-
 		return (
-			<li role="presentation" className={className}>
+			<li role="presentation" className={this.state.className}>
 				<Link to={this.props.to}>{this.props.children}</Link>
 			</li>
 		)
 	}
 }
 
-const NavMenuItem = withRouter(NavMenuItemClass)
-
 class NavMenu extends Component {
 	render() {
-		console.dump("NavMenu->render", this)
-
 		return (
 			<nav className="navbar navbar-default">
 				<div className="navbar-header">
 					<div className="collapse navbar-collapse">
 						<ul className="nav navbar-nav">
-							<NavMenuItem to={`/`}>Home</NavMenuItem>
-							<NavMenuItem to={`/about`}>About</NavMenuItem>
+							<NavMenuItem to={`/`} {...this.props}>Home</NavMenuItem>
+							<NavMenuItem to={`/about`} {...this.props}>About</NavMenuItem>
 						</ul>
 					</div>
 				</div>
