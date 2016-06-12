@@ -1,8 +1,6 @@
 import React, { PropTypes } from "react"
 
 export default class About extends React.Component {
-  getDefaultProps() { console.log("About->getDefaultProps") }
-
   componentWillMount() { console.log("About->componentWillMount") }
 
   componentDidMount() { console.log("About->componentDidMount") }

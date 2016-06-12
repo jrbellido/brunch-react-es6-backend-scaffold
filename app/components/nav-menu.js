@@ -19,7 +19,7 @@ class NavMenuItem extends Component {
 		this.props.router.registerTransitionHook(this.updateActive(this))
 	}
 
-	componentDidUnmount() {
+	componentWillUnmount() {
 		this.props.router.unregisterTransitionHook()	
 	}
 

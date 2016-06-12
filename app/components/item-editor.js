@@ -40,25 +40,6 @@ class ItemEditor extends Component {
     form.value.value = this.props.item.value
   }
 
-  routeWillLeave(nextLocation) { console.dump("ItemEditor->routeWillLeave", nextLocation) }
-
-  // Determines if methods `componentWillUpdate` and `componentDidUpdate` should be called
-  shouldComponentUpdate() { return false }
-
-  componentWillReceiveProps() { console.dump("ItemEditor->componentWillReceiveProps", this) }
-
-  getInitialState() { console.log("ItemEditor->getInitialState") }
-
-  getDefaultProps() { console.log("ItemEditor->getDefaultProps") }
-
-  componentWillMount() {console.dump("ItemEditor->componentWillMount", this) }
-
-  componentWillUpdate() { console.log("ItemEditor->componentWillUpdate") }
-
-  componentDidUpdate() { console.log("ItemEditor->componentDidUpdate") }
-
-  componentWillUnmount() { console.log("ItemEditor->componentWillUnmount") }
-
   render() {
     console.dump("ItemEditor->render", this)
 

@@ -21,8 +21,6 @@ class ItemManager extends Component {
   ]
 
   componentDidMount() {
-    console.log("ItemManager->componentDidMount")
-
     //this.props.router.setRouteLeaveHook(this.props.route, this.routeWillLeave)
   }
 
@@ -41,18 +39,6 @@ class ItemManager extends Component {
 
     this.forceUpdate()
   }
-
-  getInitialState() { console.log("ItemManager->getInitialState") }
-
-  getDefaultProps() { console.log("ItemManager->getDefaultProps") }
-
-  componentWillMount() { console.log("ItemManager->componentWillMount") }
-
-  componentWillUpdate() { console.log("ItemManager->componentWillUpdate") }
-
-  componentDidUpdate() { console.log("ItemManager->componentDidUpdate") }
-
-  componentWillUnmount() { console.log("ItemManager->componentWillUnmount") }
 
   render() {
     const { items, dispatch } = this.props

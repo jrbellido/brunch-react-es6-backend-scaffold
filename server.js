@@ -57,7 +57,14 @@ const appServer = function(config) {
           const initialState = store.getState()
           const initialStateHtml = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};</script>`
 
+          const initialHtml = (
+            <Provider store={store}>
+                <RouterContext {...renderProps} />
+            </Provider>
+          )
+
           res.render('app', {
+            initialHtml: renderToString(initialHtml),
             initialState: initialStateHtml
           })
         })
@@ -66,7 +73,6 @@ const appServer = function(config) {
   })
 
   return app
-
 }
 
 export default appServer
