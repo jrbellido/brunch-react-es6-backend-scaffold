@@ -18,7 +18,7 @@ class AppLayout extends Component {
             <div className="brand app-header">
               <h1>webpack-react-es6-backend-scaffold</h1>
           
-              <NavMenu route={this.props.route} />
+              <NavMenu route={this.props.route} location={this.props.location} />
             </div>
           </div>
         </div>

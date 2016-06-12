@@ -1,12 +1,12 @@
 import React, { PropTypes, Component } from "react"
-import { withRouter, Link } from "react-router"
+import { withRouter, Link, browserHistory } from "react-router"
 import { connect } from "react-redux"
 
 class NavMenuItem extends Component {
 	constructor(props) {
 		super(props)
-		this.state = { className: "" }
-		//this.state = { className: this.props.router.isActive(this.props.to)?"active":"" }
+
+		this.state = { className: this.props.location.pathname == this.props.to ? "active" : "" }
 	}
 
 	updateActive(context) {

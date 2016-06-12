@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from "react"
 import { Link } from "react-router"
-import Immutable from "immutable"
 
 import * as ItemActions from "../actions/ItemActions"
 

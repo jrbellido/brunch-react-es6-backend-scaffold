@@ -1,42 +1,19 @@
 import React, { PropTypes } from "react"
 
 export default class About extends React.Component {
+  getDefaultProps() { console.log("About->getDefaultProps") }
 
-  getInitialState() {
-    console.log("About->getInitialState")
-  }
+  componentWillMount() { console.log("About->componentWillMount") }
 
-  getDefaultProps() {
-    console.log("About->getDefaultProps")
-  }
+  componentDidMount() { console.log("About->componentDidMount") }
 
-  componentWillMount() {
-    console.log("About->componentWillMount") 
-  }
+  componentWillReceiveProps() { console.log("About->componentWillReceiveProps") }
 
-  componentDidMount() {
-    console.log("About->componentDidMount")
-  }
+  componentWillUpdate() { console.log("About->componentWillUpdate") }
 
-  componentWillReceiveProps() {
-    console.log("About->componentWillReceiveProps")
-  }
+  componentDidUpdate() { console.log("About->componentDidUpdate") }
 
-  shouldComponentUpdate() {
-    return false
-  }
-
-  componentWillUpdate() {
-    console.log("About->componentWillUpdate")
-  }
-
-  componentDidUpdate() {
-    console.log("About->componentDidUpdate")
-  }
-
-  componentWillUnmount() {
-   console.log("About->componentWillUnmount")
-  }
+  componentWillUnmount() { console.log("About->componentWillUnmount") }
 
   render() {
     console.dump("About->render", this)
