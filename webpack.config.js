@@ -44,8 +44,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg|eot|woff2|woff|ttf)(\?.*)?$/,
-        loader: "file",
-        include: /(node_modules)/
+        loader: "file"
       },
       {
         test: /\.scss$/,

@@ -33,14 +33,9 @@ export function deleteItem(id) {
   }
 }
 
-/*
-export function editItem(id, name, value) {
+export function updateItem(id, item) {
   return {
-    type: 'EDIT_ITEM',
-    promise: request.post(API_URL)
-    id,
-    name,
-    value
-  }
+    type: 'UPDATE_ITEM',
+    promise: request.put(`${API_URL}/${id}`, item)
+  }  
 }
-*/

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from "react"
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
-import { withRouter } from "react-router"
+import { withRouter, Link } from "react-router"
 
 import console from "../lib/console"
 
@@ -62,6 +62,8 @@ class ItemManager extends Component {
     return (
       <div className="item-manager">
         <h3>Item manager</h3>
+
+        <Link to={`/item/new`}>New</Link>
 
         <ItemList items={items} dispatch={dispatch}
             {...bindActionCreators(ItemActions, dispatch)} />

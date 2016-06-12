@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from "react"
-import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 import { withRouter, Link } from "react-router"
 
@@ -20,11 +19,24 @@ class ItemEditor extends Component {
     ItemActions.getItem
   ]
 
+  handleSaveChanges(ev) {
+    console.dump("ItemEditor->handleSaveChanges", this, ev)
+
+    const form = this.refs.itemEditForm
+
+    const updatedItem = { name: form.name.value, value: form.value.value }
+
+    this.props.dispatch(ItemActions.updateItem(this.props.params.id, updatedItem)).then(() => {
+      this.props.router.replace("/")
+    })
+
+    ev.preventDefault()
+  }
+
   componentDidMount() { 
     console.dump("ItemEditor->componentDidMount", this)
 
     const form = this.refs.itemEditForm
-
     form.name.value = this.props.item.name
     form.value.value = this.props.item.value
   }
@@ -53,14 +65,12 @@ class ItemEditor extends Component {
 
     const { item, dispatch } = this.props
 
-    console.log("---", this.props.item)
-
     return (
       <div className="item-editor">
         <div><Link to={`/`}>Return to list</Link></div>
         <h3>Item edit</h3>
 
-        <form ref="itemEditForm">
+        <form ref="itemEditForm" onSubmit={ (ev) => this.handleSaveChanges(ev) }>
           <div>
             <input name="name" type="text" placeholder="Name" />
           </div>
@@ -68,7 +78,7 @@ class ItemEditor extends Component {
             <input name="value" type="text" placeholder="Value" />
           </div>
 
-          <input type="submit" value="Save" />
+          <Link to={`/`}>Cancel</Link> <input type="submit" value="Save" />
         </form>
       </div>
     )

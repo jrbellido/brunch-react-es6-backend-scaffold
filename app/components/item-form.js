@@ -1,10 +1,17 @@
-import React, { Component } from "react"
+import React, { Component, PropTypes } from "react"
+import { connect } from "react-redux"
+import { withRouter, Link } from "react-router"
+
 import console from "../lib/console"
 import * as ItemActions from "../actions/ItemActions"
 
 import Item from "./item"
 
-export default class ItemForm extends Component {
+class ItemForm extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired
+  }
+
   constructor(props) {
     super(props)
   }
@@ -13,9 +20,9 @@ export default class ItemForm extends Component {
   	console.dump("ItemForm->handleSubmit", this, ev)
 
     const form = this.refs.formElement
-    this.props.createItem(form.name.value, form.value.value).then(() => {
-      form.name.value = ""
-      form.value.value = ""
+
+    this.props.dispatch(ItemActions.createItem(form.name.value, form.value.value)).then(() => {
+      this.props.router.replace("/")
     })
 
   	ev.preventDefault()
@@ -24,11 +31,16 @@ export default class ItemForm extends Component {
   render() {
     return (
       <form className="item-form" onSubmit={(e) => this.handleSubmit(e)} ref="formElement">
-        <h3>Submit item</h3>
-        <input name="name" placeholder="Name" type="text" />
-        <input name="value" placeholder="Value" type="text" />
-        <button>Submit</button>
+        <div><Link to={`/`}>Return to list</Link></div>
+        <h3>Create a new item</h3>
+
+        <div><input name="name" placeholder="Name" type="text" /></div>
+        <div><input name="value" placeholder="Value" type="text" /></div>
+        
+        <Link to={`/`}>Cancel</Link> <input type="submit" value="Create" />
       </form>
     )
   }
 }
+
+export default connect(state => (state))(withRouter(ItemForm))
