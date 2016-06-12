@@ -13,7 +13,10 @@ module.exports = {
       "react-dom",
       "react-redux",
       "react-router",
-      "redux"
+      "redux",
+      "immutable",
+      "axios",
+      "process"
     ]
   },
   output: {
@@ -43,7 +46,7 @@ module.exports = {
         }
       },
       {
-        test: /\.(png|jpe?g|gif|svg|eot|woff2|woff|ttf)(\?.*)?$/,
+        test: /\.(png|jpe?g|gif|svg|eot|otf|woff2|woff|ttf)(\?.*)?$/,
         loader: "file"
       },
       {
