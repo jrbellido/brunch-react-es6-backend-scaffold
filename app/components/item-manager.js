@@ -23,11 +23,11 @@ class ItemManager extends Component {
   componentDidMount() {
     console.log("ItemManager->componentDidMount")
 
-    this.props.router.setRouteLeaveHook(this.props.route, this.routeWillLeave)
+    //this.props.router.setRouteLeaveHook(this.props.route, this.routeWillLeave)
   }
 
   routeWillLeave(nextLocation) {
-    console.dump("ItemManager->routeWillLeave", nextLocation)
+    //console.dump("ItemManager->routeWillLeave", nextLocation)
 
     // Uncomment to disallow route change
     //return false;
@@ -61,6 +61,10 @@ class ItemManager extends Component {
 
     return (
       <div className="item-manager">
+        <ol className="breadcrumb">
+          <li className="active">Items</li>
+        </ol>
+
         <h3>Item manager</h3>
 
         <Link to={`/item/new`}>New</Link>

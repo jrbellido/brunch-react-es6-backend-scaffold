@@ -1,20 +1,27 @@
 import React, { PropTypes, Component } from "react"
+import { withRouter } from "react-router"
 import NavMenu from "./nav-menu"
 import Footer from "./footer"
 
-export default class AppLayout extends Component {
+class AppLayout extends Component {
   static propTypes = {
     children: PropTypes.object
   }
 
   render() {
+    console.dump("AppLayout->render", this)
+
     return (
-      <div id="app">
-        <h1>webpack-react-es6-backend-scaffold</h1>
-        
-        <NavMenu />
-        
-        <hr />
+      <div id="app" className="container-fluid">
+        <div className="row">
+          <div className="col-md-12">
+            <div className="brand app-header">
+              <h1>webpack-react-es6-backend-scaffold</h1>
+          
+              <NavMenu route={this.props.route} />
+            </div>
+          </div>
+        </div>
 
         {this.props.children}
 
@@ -23,3 +30,5 @@ export default class AppLayout extends Component {
     )
   }
 }
+
+export default withRouter(AppLayout)

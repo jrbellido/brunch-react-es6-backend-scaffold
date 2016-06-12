@@ -31,13 +31,17 @@ class ItemForm extends Component {
   render() {
     return (
       <form className="item-form" onSubmit={(e) => this.handleSubmit(e)} ref="formElement">
-        <div><Link to={`/`}>Return to list</Link></div>
+        <ol className="breadcrumb">
+          <li><Link to={`/`}>Items</Link></li>
+          <li className="active">New</li>
+        </ol>
+
         <h3>Create a new item</h3>
 
         <div><input name="name" placeholder="Name" type="text" /></div>
         <div><input name="value" placeholder="Value" type="text" /></div>
         
-        <Link to={`/`}>Cancel</Link> <input type="submit" value="Create" />
+        <Link className="btn btn-default" to={`/`}>Cancel</Link> <input className="btn btn-primary" type="submit" value="Create" />
       </form>
     )
   }

@@ -30,7 +30,7 @@ export default class Item extends Component {
           <span><Link to={`/item/${item.id}`}>{item.name}</Link></span>
           <span><label>Value:</label> {item.value}</span>
           <span class="component">
-            <button className="topcoat-button" onClick={(e) => this.handleRemove(e, item.id)}><i className="fa fa-trash" /> Remove</button>
+            <button className="btn btn-default btn-xs" onClick={(e) => this.handleRemove(e, item.id)}><i className="fa fa-trash" /></button>
           </span>
         </div>
       </li>

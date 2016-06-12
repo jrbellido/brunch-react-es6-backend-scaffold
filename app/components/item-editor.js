@@ -67,10 +67,14 @@ class ItemEditor extends Component {
 
     return (
       <div className="item-editor">
-        <div><Link to={`/`}>Return to list</Link></div>
-        <h3>Item edit</h3>
-
         <form ref="itemEditForm" onSubmit={ (ev) => this.handleSaveChanges(ev) }>
+          <ol className="breadcrumb">
+            <li><Link to={`/`}>Items</Link></li>
+            <li className="active">Edit</li>
+          </ol>
+
+          <h3>Edit: {item.name}</h3>
+          
           <div>
             <input name="name" type="text" placeholder="Name" />
           </div>
@@ -78,7 +82,7 @@ class ItemEditor extends Component {
             <input name="value" type="text" placeholder="Value" />
           </div>
 
-          <Link to={`/`}>Cancel</Link> <input type="submit" value="Save" />
+          <Link className="btn btn-default" to={`/`}>Cancel</Link> <input className="btn btn-primary" type="submit" value="Save" />
         </form>
       </div>
     )

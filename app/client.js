@@ -25,7 +25,7 @@ const reducer = combineReducers(appReducers)
 const store = applyMiddleware(promiseMiddleware)(createStore)(reducer, initialState)
 
 browserHistory.listenBefore((location, callback) => {
-	console.dump("browserHistory.listenBefore", location, callback)
+	console.dump("browserHistory->listenBefore", location, callback)
 
 	match({ routes, location }, (err, redirectLocation, renderProps) => {
 		console.dump("react-router->match", err, redirectLocation, renderProps)

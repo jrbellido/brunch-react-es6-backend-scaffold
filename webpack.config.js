@@ -3,8 +3,6 @@ var webpack = require("webpack");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var config = require("./config")(process.argv);
 
-//var lessExtract = new ExtractTextPlugin(fp.join(__dirname, "public", "styles-[name].[chunkhash].css"));
-
 module.exports = {
   entry: {
     app: "./app/client.js",
