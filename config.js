@@ -11,7 +11,7 @@ function config(procArgV, defaults) {
 		"environmentName": "default",
 		"development": false,
 		"server": {
-			"port": 3008,
+			"port": 3000,
 			"host": "127.0.0.1",
 			"assetPath": "http://127.0.0.1:3000/public"
 		},

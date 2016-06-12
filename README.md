@@ -8,7 +8,7 @@
     * [nodemon](https://github.com/remy/nodemon): `npm install -g nodemon`
     * App dependencies: `npm install`
 * Configure:
-    * Copy `.env.json.sample` as `.development.json` and modify its content
+    * Copy `.env.js.sample` as `.development.js` and modify its content
 * Run:
 	* `npm run dev`
     * `npm run watch`
