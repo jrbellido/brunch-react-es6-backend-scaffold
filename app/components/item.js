@@ -27,7 +27,7 @@ export default class Item extends Component {
       <tr className="item" key={item.id} ref="activeItem">
         <td><span><Link to={`/item/${item.id}`}>{item.name}</Link></span></td>
         <td><span>{item.value}</span></td>
-        <td><button className="btn btn-default btn-xs" onClick={(e) => this.handleRemove(e, item.id)}><i className="fa fa-trash" /></button></td>
+        <td><button className="btn btn-default btn-xs" onClick={(e) => this.handleRemove(e, item.id)}>Delete</button></td>
       </tr>
     )
   }

@@ -38,10 +38,21 @@ class ItemForm extends Component {
 
         <h3>Create a new item</h3>
 
-        <div><input name="name" placeholder="Name" type="text" /></div>
-        <div><input name="value" placeholder="Value" type="text" /></div>
-        
-        <Link className="btn btn-default" to={`/`}>Cancel</Link> <input className="btn btn-primary" type="submit" value="Create" />
+        <div className="container no-h-padding">
+          <div className="row">
+            <div className="col-xs-4">
+              <div className="form-group">
+                <input className="form-control" name="name" type="text" placeholder="Name" />
+              </div>
+
+              <div className="form-group">
+                <input className="form-control" name="value" type="text" placeholder="Value" />
+              </div>
+
+              <input className="btn btn-primary" type="submit" value="Create" /> <Link className="btn btn-default" to={`/`}>Cancel</Link>
+            </div>
+          </div>
+        </div>
       </form>
     )
   }

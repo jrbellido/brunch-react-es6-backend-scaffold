@@ -47,13 +47,16 @@ class ItemManager extends Component {
 
     return (
       <div className="item-manager">
-        <ol className="breadcrumb">
-          <li className="active">Items</li>
-        </ol>
-
-        <h3>Item manager</h3>
-
-        <Link className="btn btn-primary" to={`/item/new`}>New</Link>
+        <div className="container-fluid no-h-padding">
+          <div className="row">
+            <div className="col-xs-6">
+              <h3 className="no-v-margin">Item manager</h3>
+            </div>
+            <div className="col-xs-6 align-right">
+              <Link className="btn btn-primary" to={`/item/new`}>New</Link>
+            </div>
+          </div>
+        </div>
 
         <ItemList items={items} dispatch={dispatch}
             {...bindActionCreators(ItemActions, dispatch)} />

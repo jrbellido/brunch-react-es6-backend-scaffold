@@ -50,19 +50,26 @@ class ItemEditor extends Component {
         <form ref="itemEditForm" onSubmit={ (ev) => this.handleSaveChanges(ev) }>
           <ol className="breadcrumb">
             <li><Link to={`/`}>Items</Link></li>
-            <li className="active">Edit</li>
+            <li className="active">{item.name}</li>
           </ol>
 
           <h3>Edit: {item.name}</h3>
           
-          <div>
-            <input name="name" type="text" placeholder="Name" />
-          </div>
-          <div>
-            <input name="value" type="text" placeholder="Value" />
-          </div>
+          <div className="container no-h-padding">
+            <div className="row">
+              <div className="col-xs-4">
+                <div className="form-group">
+                  <input className="form-control" name="name" type="text" placeholder="Name" />
+                </div>
 
-          <Link className="btn btn-default" to={`/`}>Cancel</Link> <input className="btn btn-primary" type="submit" value="Save" />
+                <div className="form-group">
+                  <input className="form-control" name="value" type="text" placeholder="Value" />
+                </div>
+
+                <input className="btn btn-primary" type="submit" value="Save" /> <Link className="btn btn-default" to={`/`}>Cancel</Link>
+              </div>
+            </div>
+          </div>
         </form>
       </div>
     )

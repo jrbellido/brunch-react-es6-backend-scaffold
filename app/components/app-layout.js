@@ -23,9 +23,17 @@ class AppLayout extends Component {
           </div>
         </div>
 
-        {this.props.children}
+        <div className="row">
+          <div className="col-md-12">
+            {this.props.children}
+          </div>
+        </div>
 
-        <Footer />
+        <div className="row">
+          <div className="col-md-12">
+            <Footer />
+          </div>
+        </div>
       </div>
     )
   }

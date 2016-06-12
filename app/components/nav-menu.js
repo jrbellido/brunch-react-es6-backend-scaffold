@@ -35,16 +35,10 @@ class NavMenuItem extends Component {
 class NavMenu extends Component {
 	render() {
 		return (
-			<nav className="navbar navbar-default">
-				<div className="navbar-header">
-					<div className="collapse navbar-collapse">
-						<ul className="nav navbar-nav">
-							<NavMenuItem to={`/`} {...this.props}>Home</NavMenuItem>
-							<NavMenuItem to={`/about`} {...this.props}>About</NavMenuItem>
-						</ul>
-					</div>
-				</div>
-			</nav>
+			<ul className="nav nav-pills">
+				<NavMenuItem to={`/`} {...this.props}>Home</NavMenuItem>
+				<NavMenuItem to={`/about`} {...this.props}>About</NavMenuItem>
+			</ul>
 		)
 	}
 }
