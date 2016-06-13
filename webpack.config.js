@@ -51,10 +51,27 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract("css!autoprefixer!sass")
+      },
+      {
+        test: /\.json$/,
+        loader: "json"
+      },
+      {
+        test: /\.js$/,
+        include: path.resolve("node_modules/mapbox-gl-shaders/index.js"),
+        loader: "transform/cacheable?brfs"
+      }
+    ],
+    postLoaders: [
+      {
+        include: /node_modules\/mapbox-gl-shaders/,
+        loader: "transform",
+        query: "brfs"
       }
     ]
   },
   resolve: {
     extensions: ["", ".js"],
+    alias: "webworkify": "webworkify-webpack"
   },
 };
