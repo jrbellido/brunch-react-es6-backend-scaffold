@@ -14,8 +14,7 @@ module.exports = {
       "redux",
       "immutable",
       "axios",
-      "process",
-      "jquery"
+      "process"
     ]
   },
   output: {
@@ -58,7 +57,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        include: path.resolve("node_modules/mapbox-gl-shaders/index.js"),
+        include: fp.resolve("node_modules/mapbox-gl-shaders/index.js"),
         loader: "transform/cacheable?brfs"
       }
     ],
@@ -72,6 +71,6 @@ module.exports = {
   },
   resolve: {
     extensions: ["", ".js"],
-    alias: "webworkify": "webworkify-webpack"
+    alias: { "webworkify": "webworkify-webpack" }
   },
 };
