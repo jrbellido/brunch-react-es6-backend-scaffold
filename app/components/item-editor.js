@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
 import { withRouter, Link } from "react-router"
-import Button from "react-bootstrap/lib/Button"
+
+import { Button, FormGroup, Col } from "react-bootstrap/lib"
+import { Form, ValidatedInput } from "react-bootstrap-validation"
 
 import console from "../lib/console"
 
@@ -19,26 +21,16 @@ class ItemEditor extends Component {
     ItemActions.getItem
   ]
 
-  handleSaveChanges(ev) {
-    console.dump("ItemEditor->handleSaveChanges", this, ev)
+  _handleValidSubmit(values) {
+    console.dump("ItemEditor->_handleValidSubmit", this, values)
 
-    const form = this.refs.itemEditForm
-
-    const updatedItem = { name: form.name.value, value: form.value.value }
-
-    this.props.dispatch(ItemActions.updateItem(this.props.params.id, updatedItem)).then(() => {
+    this.props.dispatch(ItemActions.updateItem(this.props.item.id, values)).then(() => {
       this.props.router.replace("/")
     })
-
-    ev.preventDefault()
   }
 
-  componentDidMount() { 
-    console.dump("ItemEditor->componentDidMount", this)
-
-    const form = this.refs.itemEditForm
-    form.name.value = this.props.item.name
-    form.value.value = this.props.item.value
+  _handleInvalidSubmit(errors, values) {
+    console.dump("ItemEditor->_handleInvalidSubmit", this, errors, values)
   }
 
   render() {
@@ -47,32 +39,56 @@ class ItemEditor extends Component {
     const { item, dispatch } = this.props
 
     return (
-      <div className="item-editor">
-        <form ref="itemEditForm" onSubmit={ (ev) => this.handleSaveChanges(ev) }>
-          <ol className="breadcrumb">
-            <li><Link to={`/`}>Items</Link></li>
-            <li className="active">{item.name}</li>
-          </ol>
+      <Form 
+        className="item-editor" 
+        onValidSubmit={this._handleValidSubmit.bind(this)} 
+        onInvalidSubmit={this._handleInvalidSubmit.bind(this)}
+      >
+        <ol className="breadcrumb">
+          <li><Link to={`/`}>Items</Link></li>
+          <li className="active">{item.name}</li>
+        </ol>
 
-          <h3>Edit: {item.name}</h3>
-          
-          <div className="container no-h-padding">
-            <div className="row">
-              <div className="col-xs-4">
-                <div className="form-group">
-                  <input className="form-control" name="name" type="text" placeholder="Name" />
-                </div>
+        <h3>Edit: {item.name}</h3>
 
-                <div className="form-group">
-                  <input className="form-control" name="value" type="text" placeholder="Value" />
-                </div>
-
-                <Button bsStyle="primary" type="submit">Save</Button> <Link className="btn btn-default" to={`/`}>Cancel</Link>
-              </div>
-            </div>
+        <div className="container no-h-padding">
+          <div className="row">
+            <Col xs={4}>
+              <ValidatedInput
+                type="text"
+                name="name"
+                placeholder="Name"
+                validate="required"
+                defaultValue={this.props.item.name}
+                errorHelp={{
+                  required: "Please enter a name"
+                }}
+              />
+            </Col>
           </div>
-        </form>
-      </div>
+
+          <div className="row">
+            <Col xs={4}>
+              <ValidatedInput
+                type="text"
+                name="value"
+                placeholder="Value"
+                validate="required"
+                defaultValue={this.props.item.value}
+                errorHelp={{
+                  required: "Please enter a value"
+                }}
+              />
+            </Col>
+          </div>
+
+          <div className="row">
+            <Col xs={12}>
+              <Button bsStyle="primary" type="submit">Save</Button> <Link className="btn btn-default" to={`/`}>Cancel</Link>
+            </Col>
+          </div>
+        </div>
+      </Form>
     )
   }
 }

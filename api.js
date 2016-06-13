@@ -77,7 +77,7 @@ app.post("/item", function(req, res) {
     var item = {
         "id": md5(JSON.stringify(req.body) + new Date().getMilliseconds()),
         "name": req.body.name,
-        "value": req.body.value
+        "value": parseFloat(req.body.value)
     };
 
     db = db.push(item);
@@ -101,7 +101,7 @@ app.put("/item/:id", function(req, res) {
     newItem = {
         "id": req.params.id,
         "name": req.body.name,
-        "value": req.body.value
+        "value": parseFloat(req.body.value)
     };
 
     db = db.update(db.findIndex(function(item) {

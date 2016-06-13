@@ -2,37 +2,38 @@ import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
 import { withRouter, Link } from "react-router"
 
-import { Form, Button } from "react-bootstrap/lib"
+import { Button, FormGroup, Col } from "react-bootstrap/lib"
+import { Form, ValidatedInput } from "react-bootstrap-validation"
 
 import console from "../lib/console"
 import * as ItemActions from "../actions/ItemActions"
 
 import Item from "./item"
 
-class ItemForm extends Component {
+class ItemNew extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired
   }
 
-  constructor(props) {
-    super(props)
-  }
+  _handleValidSubmit(values) {
+    console.dump("ItemNew->_handleValidSubmit", this, values)
 
-  handleSubmit(ev) {
-  	console.dump("ItemForm->handleSubmit", this, ev)
-
-    const form = this.refs.formElement
-
-    this.props.dispatch(ItemActions.createItem(form.name.value, form.value.value)).then(() => {
+    this.props.dispatch(ItemActions.createItem(values.name, values.value)).then(() => {
       this.props.router.replace("/")
     })
+  }
 
-  	ev.preventDefault()
+  _handleInvalidSubmit(errors, values) {
+    console.dump("ItemNew->_handleInvalidSubmit", this, errors, values)
   }
 
   render() {
     return (
-      <form className="item-form" onSubmit={(e) => this.handleSubmit(e)} ref="formElement">
+      <Form 
+        className="item-new"
+        onValidSubmit={this._handleValidSubmit.bind(this)} 
+        onInvalidSubmit={this._handleInvalidSubmit.bind(this)}
+      >
         <ol className="breadcrumb">
           <li><Link to={`/`}>Items</Link></li>
           <li className="active">New</li>
@@ -42,22 +43,42 @@ class ItemForm extends Component {
 
         <div className="container no-h-padding">
           <div className="row">
-            <div className="col-xs-4">
-              <div className="form-group">
-                <input className="form-control" name="name" type="text" placeholder="Name" />
-              </div>
+            <Col xs={4}>
+              <ValidatedInput
+                type="text"
+                name="name"
+                placeholder="Name"
+                validate="required"
+                errorHelp={{
+                  required: "Please enter a name"
+                }}
+              />
+            </Col>
+          </div>
 
-              <div className="form-group">
-                <input className="form-control" name="value" type="text" placeholder="Value" />
-              </div>
+          <div className="row">
+            <Col xs={4}>
+              <ValidatedInput
+                type="text"
+                name="value"
+                placeholder="Value"
+                validate="required"
+                errorHelp={{
+                  required: "Please enter a value"
+                }}
+              />
+            </Col>
+          </div>
 
+          <div className="row">
+            <Col xs={12}>
               <Button bsStyle="primary" type="submit">Create</Button> <Link className="btn btn-default" to={`/`}>Cancel</Link>
-            </div>
+            </Col>
           </div>
         </div>
-      </form>
+      </Form>
     )
   }
 }
 
-export default connect(state => (state))(withRouter(ItemForm))
+export default connect(state => (state))(withRouter(ItemNew))

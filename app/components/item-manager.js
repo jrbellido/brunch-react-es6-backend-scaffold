@@ -20,20 +20,6 @@ class ItemManager extends Component {
     ItemActions.getItems
   ]
 
-  componentDidMount() {
-    //this.props.router.setRouteLeaveHook(this.props.route, this.routeWillLeave)
-  }
-
-  routeWillLeave(nextLocation) {
-    //console.dump("ItemManager->routeWillLeave", nextLocation)
-
-    // Uncomment to disallow route change
-    //return false;
-  }
-
-  // Determines if methods `componentWillUpdate` and `componentDidUpdate` should be called
-  // shouldComponentUpdate() { return false }
-
   componentWillReceiveProps() {
     console.dump("ItemManager->componentWillReceiveProps", this)
 
