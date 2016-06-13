@@ -44,7 +44,6 @@
     "handlebars": "^4.0.5",
     "history": "^3.0.0",
     "immutable": "^3.8.1",
-    "jquery": "^3.0.0",
     "md5": "^2.1.0",
     "minimist": "^1.2.0",
     "node-sass": "^3.7.0",
