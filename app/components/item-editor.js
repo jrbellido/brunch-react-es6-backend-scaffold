@@ -49,42 +49,47 @@ class ItemEditor extends Component {
           <li className="active">{item.name}</li>
         </ol>
 
-        <h3>Edit: {item.name}</h3>
-
-        <div className="container no-h-padding">
-          <div className="row">
-            <Col xs={4}>
-              <ValidatedInput
-                type="text"
-                name="name"
-                placeholder="Name"
-                defaultValue={this.props.item.name}
-                validate="required,isLength:5:60"
-                errorHelp={{
-                  required: "Please enter a name",
-                  isLength: "Name must be between 5 and 60 characters long"
-                }}
-              />
-            </Col>
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <h3 className="panel-title">Edit: <strong>{item.name}</strong></h3>
           </div>
+          <div className="panel-body">
+            <div className="container no-h-padding">
+              <div className="row">
+                <Col xs={4}>
+                  <ValidatedInput
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    defaultValue={this.props.item.name}
+                    validate="required,isLength:5:60"
+                    errorHelp={{
+                      required: "Please enter a name",
+                      isLength: "Name must be between 5 and 60 characters long"
+                    }}
+                  />
+                </Col>
+              </div>
 
-          <div className="row">
-            <Col xs={4}>
-              <ValidatedInput
-                type="text"
-                name="value"
-                placeholder="Value"
-                defaultValue={this.props.item.value}
-                validate={(val, context) => { return !isNaN(parseFloat(val)) } }
-                errorHelp="Invalid value"
-              />
-            </Col>
-          </div>
+              <div className="row">
+                <Col xs={4}>
+                  <ValidatedInput
+                    type="text"
+                    name="value"
+                    placeholder="Value"
+                    defaultValue={this.props.item.value}
+                    validate={(val, context) => { return !isNaN(parseFloat(val)) } }
+                    errorHelp="Invalid value"
+                  />
+                </Col>
+              </div>
 
-          <div className="row">
-            <Col xs={12}>
-              <Button bsStyle="primary" type="submit">Save</Button> <Link className="btn btn-default" to={`/`}>Cancel</Link>
-            </Col>
+              <div className="row">
+                <Col xs={12}>
+                  <Button bsStyle="primary" type="submit">Save</Button> <Link className="btn btn-default" to={`/`}>Cancel</Link>
+                </Col>
+              </div>
+            </div>
           </div>
         </div>
       </Form>

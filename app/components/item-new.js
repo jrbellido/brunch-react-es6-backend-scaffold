@@ -39,40 +39,45 @@ class ItemNew extends Component {
           <li className="active">New</li>
         </ol>
 
-        <h3>Create a new item</h3>
-
-        <div className="container no-h-padding">
-          <div className="row">
-            <Col xs={4}>
-              <ValidatedInput
-                type="text"
-                name="name"
-                placeholder="Name"
-                validate="required,isLength:5:60"
-                errorHelp={{
-                  required: "Please enter a name",
-                  isLength: "Name must be between 5 and 60 characters long"
-                }}
-              />
-            </Col>
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <h3 className="panel-title">Create a new item</h3>
           </div>
+          <div className="panel-body">
+            <div className="container no-h-padding">
+              <div className="row">
+                <Col xs={4}>
+                  <ValidatedInput
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    validate="required,isLength:5:60"
+                    errorHelp={{
+                      required: "Please enter a name",
+                      isLength: "Name must be between 5 and 60 characters long"
+                    }}
+                  />
+                </Col>
+              </div>
 
-          <div className="row">
-            <Col xs={4}>
-              <ValidatedInput
-                type="text"
-                name="value"
-                placeholder="Value"
-                validate={(val, context) => { return !isNaN(parseFloat(val)) } }
-                errorHelp="Invalid value"
-              />
-            </Col>
-          </div>
+              <div className="row">
+                <Col xs={4}>
+                  <ValidatedInput
+                    type="text"
+                    name="value"
+                    placeholder="Value"
+                    validate={(val, context) => { return !isNaN(parseFloat(val)) } }
+                    errorHelp="Invalid value"
+                  />
+                </Col>
+              </div>
 
-          <div className="row">
-            <Col xs={12}>
-              <Button bsStyle="primary" type="submit">Create</Button> <Link className="btn btn-default" to={`/`}>Cancel</Link>
-            </Col>
+              <div className="row">
+                <Col xs={12}>
+                  <Button bsStyle="primary" type="submit">Create</Button> <Link className="btn btn-default" to={`/`}>Cancel</Link>
+                </Col>
+              </div>
+            </div>
           </div>
         </div>
       </Form>
