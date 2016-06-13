@@ -33,7 +33,7 @@ class ItemManager extends Component {
 
     return (
       <div className="item-manager">
-        <div className="container-fluid no-h-padding">
+        <div className="heading container-fluid no-h-padding">
           <div className="row">
             <div className="col-xs-6">
               <h3 className="no-v-margin">Item manager</h3>

@@ -73,7 +73,7 @@ export default class Item extends Component {
       <tr className="item" key={item.id} ref="activeItem">
         <td><strong><Link to={`/item/${item.id}`}>{item.name}</Link></strong></td>
         <td><span>{item.value}</span></td>
-        <td>
+        <td className="text-right">
           <Button bsSize="xsmall" onClick={(e) => this.showDeleteConfirm(e)}>Delete</Button>
           <DeleteConfirmWindow 
             onConfirm={(e) => this.confirmDelete(e)} 

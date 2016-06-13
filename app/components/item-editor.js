@@ -59,9 +59,10 @@ class ItemEditor extends Component {
                 name="name"
                 placeholder="Name"
                 defaultValue={this.props.item.name}
-                validate="required"
+                validate="required,isLength:5:60"
                 errorHelp={{
-                  required: "Please enter a name"
+                  required: "Please enter a name",
+                  isLength: "Name must be between 5 and 60 characters long"
                 }}
               />
             </Col>
