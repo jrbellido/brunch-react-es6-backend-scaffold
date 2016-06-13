@@ -3,32 +3,33 @@ var winston = require("winston");
 var md5 = require("md5");
 var bodyParser = require("body-parser");
 var objectAssign = require("object-assign");
+var Immutable = require("immutable");
 
 var app = express();
 
 var logger = new winston.Logger();
 
-var db = [{
+var db = new Immutable.List([{
     id: '0a76f075154f9d560aef31df283f84ab',
     name: 'Item#1',
-    value: '998.3'
+    value: 998.3
 }, {
     id: '614b5c0d89246bd50aacc4a36fca0a37',
     name: 'Item#2',
-    value: '7626.3'
+    value: 7626.3
 }, {
     id: '9f7b879262fdc579960bee57ec6d92c5',
     name: 'Item#3',
-    value: '9082.2'
+    value: 9082.2
 }, {
     id: '8d76e139dd34ab1e796f702d1a39c734',
     name: 'Item#4',
-    value: '1298.00'
+    value: 1298.00
 }, {
     id: '0cbab2bc3f0daaca34db4250d9c7144e',
     name: 'Item#5',
-    value: '7827.93'
-}];
+    value: 7827.93
+}]);
 
 var SERVER_LATENCY = 20
 
@@ -47,8 +48,12 @@ app.use(function(req, res, next) {
 app.get("/item", function(req, res) {
     console.log(`[GET] /item`);
 
+    items = db.sortBy(function(item) {
+        return item.name
+    });
+
     setTimeout(function() {
-        res.end(JSON.stringify(db));
+        res.end(JSON.stringify(items));
     }, SERVER_LATENCY);
 });
 
@@ -56,15 +61,9 @@ app.get("/item", function(req, res) {
 app.get("/item/:id", function(req, res) {
     console.log(`[GET] /item/:id`);
 
-    var item = null;
     var id = req.params.id;
 
-    for (var i = 0; i < db.length; i++) {
-        if (db[i].id == id) {
-            item = db[i];
-            break;
-        }
-    }
+    var item = db.filter(function(item) { return (item.id === id) }).get(0);
 
     setTimeout(function() {
         res.end(JSON.stringify(item));
@@ -81,7 +80,7 @@ app.post("/item", function(req, res) {
         "value": req.body.value
     };
 
-    db.push(item);
+    db = db.push(item);
 
     setTimeout(function() {
         res.end(JSON.stringify(item));
@@ -93,20 +92,26 @@ app.put("/item/:id", function(req, res) {
     console.log(`[PUT] /item/${req.params.id}`);
 
     var id = req.params.id;
+    var newItem = null;
 
-    var item = {
+    var pos = db.findIndex(function(item) {
+        return (item.id === id);
+    });
+
+    newItem = {
+        "id": req.params.id,
         "name": req.body.name,
         "value": req.body.value
     };
 
-    for (var i = 0; i < db.length; i++) {
-        if (db[i].id == id) {
-            item = db[i] = objectAssign(db[i], item);
-        }
-    }
-
+    db = db.update(db.findIndex(function(item) {
+        return item.id === id;
+    }), function(item) {
+        return objectAssign(item, newItem);
+    });
+    
     setTimeout(function() {
-        res.end(JSON.stringify(item));
+        res.end(JSON.stringify(newItem));
     }, SERVER_LATENCY);
 });
 
@@ -118,14 +123,16 @@ app.delete("/item/:id", function(req, res) {
     var id = req.params.id;
     var element = null;
 
-    for (var i = 0; i < db.length; i++) {
-        if (db[i].id != id)
-            output.push(db[i]);
-        else
-            element = db[i];
-    }
-
-    db = output;
+    db = db.delete(
+        db.findIndex(function(item) {
+            if (item.id === id) {
+                element = item;
+                return true;
+            } else {
+                return false;
+            }
+        })
+    );
 
     setTimeout(function() {
         res.end(JSON.stringify(element));
