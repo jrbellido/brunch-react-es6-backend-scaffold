@@ -1,3 +1,5 @@
+import "babel-polyfill"
+
 import React from "react"
 import { render } from "react-dom"
 import { Router, browserHistory, RouterContext, match } from "react-router"
@@ -5,15 +7,14 @@ import { fromJS } from "immutable"
 import { Provider } from "react-redux"
 import { createStore, combineReducers, applyMiddleware }  from "redux"
 import assign from "object-assign"
-import console from "./lib/console"
-
-import * as ItemActions from "./actions/ItemActions"
 
 import appReducers from "./reducers"
+import routes from "./routes"
+
+import * as ItemActions from "./actions/ItemActions"
 import promiseMiddleware from "./lib/promiseMiddleware"
 import fetchComponentData from "./lib/fetchComponentData"
-
-import routes from "./routes"
+import console from "./lib/console"
 
 if (typeof window !== 'undefined')
   require("./styles/app.scss")
@@ -40,7 +41,10 @@ browserHistory.listenBefore((location, callback) => {
 
 render(
 	<Provider store={store}>
-		<Router children={routes} history={browserHistory} />
+		<Router 
+			children={routes} 
+			history={browserHistory} 
+		/>
 	</Provider>,
 	document.getElementById("root")
 )
