@@ -1,7 +1,36 @@
 import React, { PropTypes, Component } from "react"
+import { render } from "react-dom"
 import { Link } from "react-router"
 
+import Button from "react-bootstrap/lib/Button"
+import Modal from "react-bootstrap/lib/Modal"
+
 import * as ItemActions from "../actions/ItemActions"
+
+class DeleteConfirmModal extends Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    return (
+      <Modal {...this.props} bsSize="small" animation={false} aria-labelledby="contained-modal-title-sm">
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-sm">Confirm delete</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>You are about to delete one item, this procedure is irreversible.</p>
+          <p>Do you want to proceed?</p>
+          <p>Item ID: <br/> <strong>{this.props.item.id}</strong></p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={this.props.onHide}>Cancel</Button>
+          <Button bsStyle="danger" onClick={this.props.onConfirm}>Confirm</Button>
+        </Modal.Footer>
+      </Modal>
+    )
+  }
+}
 
 export default class Item extends Component {
   static propTypes = {
@@ -11,13 +40,25 @@ export default class Item extends Component {
 
   constructor(props) {
     super(props)
+
+    this.state = {
+      showConfirm: false
+    }
   }
 
-  handleRemove(ev, id) {
-    console.dump("Item->handleRemove", this, ev, id)
+  hideDeleteConfirm() {
+    this.setState({ showConfirm: false })
+  }
 
-    this.props.deleteItem(id)
-    ev.preventDefault()
+  showDeleteConfirm() {
+    this.setState({ showConfirm: true })
+  }
+
+  confirmDelete() {
+    console.dump("Item->confirmDelete", this)
+
+    this.props.deleteItem(this.props.item.id)
+    this.setState({ showConfirm: false })
   }
 
   render() {
@@ -27,7 +68,10 @@ export default class Item extends Component {
       <tr className="item" key={item.id} ref="activeItem">
         <td><span><Link to={`/item/${item.id}`}>{item.name}</Link></span></td>
         <td><span>{item.value}</span></td>
-        <td><button className="btn btn-default btn-xs" onClick={(e) => this.handleRemove(e, item.id)}>Delete</button></td>
+        <td>
+          <Button bsSize="xsmall" onClick={(e) => this.showDeleteConfirm(e)}>Delete</Button>
+          <DeleteConfirmModal onConfirm={(e) => this.confirmDelete(e)} show={this.state.showConfirm} onHide={(e) => this.hideDeleteConfirm(e)} {...this.props} />
+        </td>
       </tr>
     )
   }

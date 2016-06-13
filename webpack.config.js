@@ -14,7 +14,8 @@ module.exports = {
       "redux",
       "immutable",
       "axios",
-      "process"
+      "process",
+      "jquery"
     ]
   },
   output: {

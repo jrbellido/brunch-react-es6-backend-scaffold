@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
 import { withRouter, Link } from "react-router"
+import Button from "react-bootstrap/lib/Button"
 
 import console from "../lib/console"
 
@@ -66,7 +67,7 @@ class ItemEditor extends Component {
                   <input className="form-control" name="value" type="text" placeholder="Value" />
                 </div>
 
-                <input className="btn btn-primary" type="submit" value="Save" /> <Link className="btn btn-default" to={`/`}>Cancel</Link>
+                <Button bsStyle="primary" type="submit">Save</Button> <Link className="btn btn-default" to={`/`}>Cancel</Link>
               </div>
             </div>
           </div>
