@@ -6,7 +6,6 @@ import { Button, FormGroup, Col } from "react-bootstrap/lib"
 import { Form, ValidatedInput } from "react-bootstrap-validation"
 
 import console from "../lib/console"
-
 import * as ItemActions from "../actions/ItemActions"
 
 import ItemList from "./item-list"
