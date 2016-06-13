@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
 import { withRouter, Link } from "react-router"
-import Button from "react-bootstrap/lib/Button"
+
+import { Form, Button } from "react-bootstrap/lib"
 
 import console from "../lib/console"
 import * as ItemActions from "../actions/ItemActions"

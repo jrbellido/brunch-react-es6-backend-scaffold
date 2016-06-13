@@ -41,4 +41,19 @@
 	    transition: none;
 	}
 }
+
+.modal-content {
+    border-radius: 1px;
+
+    .modal-header {
+        background-color: $brand-primary;
+        color: #ffffff;
+
+        .close {
+            color: #ffffff;
+            text-shadow: none;
+            opacity: 0.8;
+        }
+    }
+}
 */
