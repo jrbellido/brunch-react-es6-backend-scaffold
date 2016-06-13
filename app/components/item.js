@@ -7,14 +7,19 @@ import Modal from "react-bootstrap/lib/Modal"
 
 import * as ItemActions from "../actions/ItemActions"
 
-class DeleteConfirmModal extends Component {
+class DeleteConfirmWindow extends Component {
   constructor(props) {
     super(props)
   }
 
   render() {
     return (
-      <Modal {...this.props} bsSize="small" animation={false} aria-labelledby="contained-modal-title-sm">
+      <Modal 
+        bsSize="small"
+        animation={false}
+        aria-labelledby="contained-modal-title-sm"
+        {...this.props}
+      >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-sm">Confirm delete</Modal.Title>
         </Modal.Header>
@@ -66,11 +71,16 @@ export default class Item extends Component {
 
     return (
       <tr className="item" key={item.id} ref="activeItem">
-        <td><span><Link to={`/item/${item.id}`}>{item.name}</Link></span></td>
+        <td><strong><Link to={`/item/${item.id}`}>{item.name}</Link></strong></td>
         <td><span>{item.value}</span></td>
         <td>
           <Button bsSize="xsmall" onClick={(e) => this.showDeleteConfirm(e)}>Delete</Button>
-          <DeleteConfirmModal onConfirm={(e) => this.confirmDelete(e)} show={this.state.showConfirm} onHide={(e) => this.hideDeleteConfirm(e)} {...this.props} />
+          <DeleteConfirmWindow 
+            onConfirm={(e) => this.confirmDelete(e)} 
+            show={this.state.showConfirm} 
+            onHide={(e) => this.hideDeleteConfirm(e)} 
+            {...this.props} 
+          />
         </td>
       </tr>
     )

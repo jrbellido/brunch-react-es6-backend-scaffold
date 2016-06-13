@@ -58,8 +58,8 @@ class ItemEditor extends Component {
                 type="text"
                 name="name"
                 placeholder="Name"
-                validate="required"
                 defaultValue={this.props.item.name}
+                validate="required"
                 errorHelp={{
                   required: "Please enter a name"
                 }}
@@ -73,11 +73,9 @@ class ItemEditor extends Component {
                 type="text"
                 name="value"
                 placeholder="Value"
-                validate="required"
                 defaultValue={this.props.item.value}
-                errorHelp={{
-                  required: "Please enter a value"
-                }}
+                validate={(val, context) => { return !isNaN(parseFloat(val)) } }
+                errorHelp="Invalid value"
               />
             </Col>
           </div>

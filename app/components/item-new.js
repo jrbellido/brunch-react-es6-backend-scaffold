@@ -62,10 +62,8 @@ class ItemNew extends Component {
                 type="text"
                 name="value"
                 placeholder="Value"
-                validate="required"
-                errorHelp={{
-                  required: "Please enter a value"
-                }}
+                validate={(val, context) => { return !isNaN(parseFloat(val)) } }
+                errorHelp="Invalid value"
               />
             </Col>
           </div>
