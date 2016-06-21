@@ -28,7 +28,7 @@ class BoardEditor extends Component {
 
         {
           pins.map( (pin) => {
-            return (<div>{pin.note}</div>)
+            return (<div key={pin.id}><img src={`http://localhost:3131/pinterest/thumb?url=${pin.image.original.url}`} /></div>)
           })
         }
       </div>

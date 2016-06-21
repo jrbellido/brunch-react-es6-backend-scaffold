@@ -1,9 +1,13 @@
 var express = require("express");
 var winston = require("winston");
 var md5 = require("md5");
+var path = require("path");
+var fs = require("fs");
 var bodyParser = require("body-parser");
 var objectAssign = require("object-assign");
 var Immutable = require("immutable");
+var Jimp = require("jimp");
+var slug = require("slug");
 
 var app = express();
 
@@ -141,9 +145,33 @@ app.delete("/item/:id", function(req, res) {
 
 // Sample: http://localhost:3131/pinterest/thumb?url=https://s-media-cache-ak0.pinimg.com/originals/ab/3f/bf/ab3fbf4dc8b24af205784d9275a24c13.jpg
 app.get("/pinterest/thumb", function(req, res) {
-    console.log(`[GET] /pinterest/thumb ${req.params.url}`);
+    console.log(`[GET] /pinterest/thumb ${req.query.url}`);
 
-    res.end("");
+    const filePath = path.join(__dirname, "temp", slug(req.query.url) + ".jpg");
+
+    try {
+        const stats = fs.statSync(filePath);
+
+        const img = fs.readFileSync(filePath);
+        res.contentType = 'image/png';
+        res.contentLength = stats.size;
+        res.end(img, 'binary');
+    } catch(e) {
+        console.log(e);
+
+        Jimp.read(req.query.url, function (err, image) {
+            image
+                .resize(120, Jimp.AUTO, Jimp.RESIZE_BICUBIC)
+                .write(filePath, function() {
+                    const stats = fs.statSync(filePath);
+
+                    const img = fs.readFileSync(filePath);
+                    res.contentType = 'image/png';
+                    res.contentLength = stats.size;
+                    res.end(img, 'binary');
+                });
+        });
+    }
 });
 
 export default app
