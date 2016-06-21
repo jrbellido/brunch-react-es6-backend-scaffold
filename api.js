@@ -139,4 +139,11 @@ app.delete("/item/:id", function(req, res) {
     }, SERVER_LATENCY);
 });
 
+// Sample: http://localhost:3131/pinterest/thumb?url=https://s-media-cache-ak0.pinimg.com/originals/ab/3f/bf/ab3fbf4dc8b24af205784d9275a24c13.jpg
+app.get("/pinterest/thumb", function(req, res) {
+    console.log(`[GET] /pinterest/thumb ${req.params.url}`);
+
+    res.end("");
+});
+
 export default app

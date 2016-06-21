@@ -10,9 +10,9 @@ export function getBoards() {
   }
 }
 
-export function getPins(boardId) {
+export function getPins(params) {
   return {
     type: 'GET_PINS',
-    promise: request.get(PINTEREST_GET_PINS.replace(/\:board/, boardId))
+    promise: request.get(PINTEREST_GET_PINS.replace(/\:board/, params.id))
   }	
 }
