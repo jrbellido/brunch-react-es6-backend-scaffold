@@ -161,7 +161,7 @@ app.get("/pinterest/thumb", function(req, res) {
 
         Jimp.read(req.query.url, function (err, image) {
             image
-                .resize(120, Jimp.AUTO, Jimp.RESIZE_BICUBIC)
+                .resize(236, Jimp.AUTO, Jimp.RESIZE_BICUBIC)
                 .write(filePath, function() {
                     const stats = fs.statSync(filePath);
 

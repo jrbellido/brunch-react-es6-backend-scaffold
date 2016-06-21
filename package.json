@@ -11,13 +11,9 @@
   },
   "scripts": {
     "dev": "nodemon index.js --env=development",
-    "watch": "webpack -w -d --env=development",
-    "api": "node api.js"
+    "watch": "webpack -w -d --env=development"
   },
-  "dependencies": {
-    "jimp": "^0.2.24",
-    "slug": "^0.9.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
     "axios": "^0.12.0",
@@ -48,6 +44,7 @@
     "handlebars": "^4.0.5",
     "history": "^3.0.0",
     "immutable": "^3.8.1",
+    "jimp": "^0.2.24",
     "leaflet": "^0.7.7",
     "md5": "^2.1.0",
     "minimist": "^1.2.0",
@@ -62,6 +59,7 @@
     "redux": "^3.5.2",
     "sass-loader": "^3.2.0",
     "serve-favicon": "^2.3.0",
+    "slug": "^0.9.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",

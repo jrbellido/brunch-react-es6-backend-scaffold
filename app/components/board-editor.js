@@ -7,6 +7,9 @@ import console from "../lib/console"
 
 import * as PinterestActions from "../actions/PinterestActions"
 
+if (typeof window !== 'undefined')
+  require("../styles/pinterest.scss")
+
 class BoardEditor extends Component {
   static propTypes = {
     pins: PropTypes.any.isRequired,
@@ -24,13 +27,26 @@ class BoardEditor extends Component {
 
     return (
       <div>
-        Board editor
+        <h3>Board: { pins.first().board.name }</h3>
 
+        <div className="pin-container">
         {
-          pins.map( (pin) => {
-            return (<div key={pin.id}><img src={`http://localhost:3131/pinterest/thumb?url=${pin.image.original.url}`} /></div>)
-          })
+          pins.map(
+            (pin) => {
+              return (<div className="pin-item" key={pin.id}>
+                <div className="pin-image">
+                  <img 
+                    data-pin-nopin="true" 
+                    src={`http://localhost:3131/pinterest/thumb?url=${pin.image.original.url}`} 
+                    width={pin.image.original.width}
+                    height={pin.image.original.height}
+                    />
+                </div>
+              </div>)
+            }
+          )
         }
+        </div>
       </div>
     )
   }
