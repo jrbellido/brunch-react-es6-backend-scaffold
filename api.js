@@ -48,7 +48,7 @@ app.use(function(req, res, next) {
 app.get("/item", function(req, res) {
     console.log(`[GET] /item`);
 
-    items = db.sortBy(function(item) {
+    const items = db.sortBy(function(item) {
         return item.name
     });
 
@@ -139,8 +139,4 @@ app.delete("/item/:id", function(req, res) {
     }, SERVER_LATENCY);
 });
 
-var PORT = process.env.PORT || 3131;
-
-app.listen(PORT, function() {
-    console.log("API listening on port", PORT);
-});
+export default app

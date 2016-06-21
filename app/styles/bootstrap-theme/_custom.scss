@@ -1,7 +1,7 @@
 .btn {
     border: 1px solid transparent;
     border-width: 1px 1px 2px;
-    border-radius: .23529412em;
+    border-radius: .23em;
     font-weight: 700;
     cursor: pointer;
 
@@ -14,19 +14,18 @@
 }
 
 .btn-default {
-	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABkCAYAAABHLFpgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDowNDgwMTE3NDA3MjA2ODExOEQ5QUJBRDM5MTQ4NTNCQiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo0NzRCNDM5OTk1M0IxMUUwODcxOUE1ODdCODlCN0UzOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo0NzRCNDM5ODk1M0IxMUUwODcxOUE1ODdCODlCN0UzOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjA0ODAxMTc0MDcyMDY4MTE4RDlBQkFEMzkxNDg1M0JCIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjA0ODAxMTc0MDcyMDY4MTE4RDlBQkFEMzkxNDg1M0JCIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+otK37gAAAIZJREFUeNpsj0ESwyAMA2VwHtP/9WX9V289o8bgUeIJF0YrCWOA9+fVAFgcvYFTsQe29CZSKnsuPBWlQFe6wVU+9mWuyqGg18C1i5dd6PedqQBsmmJKT/X7zr/heVhB23gTbYdXzxgeU8UeMBtKR00D1ct0aN543F3eDVmerO/mPy4PfwEGAAfJRmlhsp4gAAAAAElFTkSuQmCC');
+
 }
 
 .btn-primary {
-    border-color: #d4a900 #aa8700 #aa8700;
-    background: #ffbe00;
-    background: linear-gradient(to top,#ffbe00 0,#ffcb00 100%);
-    color: #3d3100;
+    border-color: darken($btn-primary-bg, 15%);
+    background: $btn-primary-bg;
+    color: $btn-primary-color;
 
     &:hover {
-	    border-color: #b89300 #8a6e00 #8a6e00;
-	    background: #ffcb00;
-	    color: #3d3100;
+        border-color: lighten(darken($btn-primary-bg, 15%), 15%);
+        background: lighten($btn-primary-bg, 15%);
+        color: lighten($btn-primary-color, 15%);
     }
 }
 
@@ -35,8 +34,8 @@
 	transition: none;
 
 	&:focus {
-	    box-shadow: 0 0 0 .13333333333333333em #0087f5;
-	    border-color: #0087f5;
+	    box-shadow: 0 0 0 .133em $btn-primary-bg;
+	    border-color: $btn-primary-bg;
 	    transition: none;
 	}
 }
@@ -46,8 +45,8 @@
         transition: none;
 
         &:focus {
-            box-shadow: 0 0 0 .13333333333333333em #a94442;
-            border-color: #a94442;
+            box-shadow: 0 0 0 .133em $brand-danger;
+            border-color: $brand-danger;
             transition: none;
         }
     }

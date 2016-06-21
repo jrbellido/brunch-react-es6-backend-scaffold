@@ -1,13 +1,14 @@
 // Branding
-$brand-primary: #00355f; // #069: brand blue
-$brand-success: #156615; // base green
+$brand-primary: #00355F;
+$brand-success: #156615;
+$brand-danger: #a94442;
 
 // Buttons
-$btn-default-bg: #0095e4;
+$btn-default-bg: #676767;
 $btn-default-color: #ffffff;
 
-$btn-primary-bg: #ffcb00;
-$btn-primary-color: #3d3100;
+$btn-primary-bg: #249CBE;
+$btn-primary-color: #FFFFFF;
 
 // Scaffolding
 $link-color: lighten($brand-primary, 15%);
