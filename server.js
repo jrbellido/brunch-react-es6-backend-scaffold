@@ -22,8 +22,8 @@ const appServer = function(config) {
   app.set("view engine", "hbs")
   app.set("views", fp.join(__dirname, "templates"))
 
-  app.engine('hbs', hbs.express4({
-    //partialsDir: fp.join(__dirname, 'templates', 'partials')
+  app.engine("hbs", hbs.express4({
+    //partialsDir: fp.join(__dirname, "templates", "partials")
   }))
 
   if (config.development) {
@@ -39,7 +39,7 @@ const appServer = function(config) {
 
   app.use(favicon(fp.join(__dirname, "public", "favicon.png")))
 
-  app.use(express.static('public'))
+  app.use(express.static("public"))
 
   app.use("/*", (req, res) => {
     const location = createLocation(req.originalUrl)
@@ -49,7 +49,7 @@ const appServer = function(config) {
     match({ routes, location }, (err, redirectLocation, renderProps) => {
       if (err) { 
         console.log(err)
-        return res.status(500).render('500')
+        return res.status(500).render("500")
       }
 
       fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
@@ -63,7 +63,7 @@ const appServer = function(config) {
             </Provider>
           )
 
-          res.render('app', {
+          res.render("app", {
             initialHtml: renderToString(initialHtml),
             initialState: initialStateHtml
           })

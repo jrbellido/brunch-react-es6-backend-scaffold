@@ -11,6 +11,7 @@ module.exports = {
       "react-dom",
       "react-redux",
       "react-router",
+	  "react-bootstrap",
       "redux",
       "immutable",
       "axios",
@@ -54,23 +55,10 @@ module.exports = {
       {
         test: /\.json$/,
         loader: "json"
-      },
-      {
-        test: /\.js$/,
-        include: fp.resolve("node_modules/mapbox-gl-shaders/index.js"),
-        loader: "transform/cacheable?brfs"
-      }
-    ],
-    postLoaders: [
-      {
-        include: /node_modules\/mapbox-gl-shaders/,
-        loader: "transform",
-        query: "brfs"
       }
     ]
   },
   resolve: {
     extensions: ["", ".js"],
-    alias: { "webworkify": "webworkify-webpack" }
   },
 };

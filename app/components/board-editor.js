@@ -7,7 +7,7 @@ import console from "../lib/console"
 
 import * as PinterestActions from "../actions/PinterestActions"
 
-if (typeof window !== 'undefined')
+if (typeof window !== "undefined")
   require("../styles/pinterest.scss")
 
 class BoardEditor extends Component {

@@ -7,7 +7,14 @@ var bodyParser = require("body-parser");
 var objectAssign = require("object-assign");
 var Immutable = require("immutable");
 var Jimp = require("jimp");
-var slug = require("slug");
+
+function slugify(s) {
+  var _slugify_strip_re = /[^\w\s-]/g;
+  var _slugify_hyphenate_re = /[-\s]+/g;
+  s = s.replace(_slugify_strip_re, '').trim().toLowerCase();
+  s = s.replace(_slugify_hyphenate_re, '-');
+  return s;
+}
 
 var app = express();
 
@@ -35,7 +42,7 @@ var db = new Immutable.List([{
     value: 7827.93
 }]);
 
-var SERVER_LATENCY = 20
+var SERVER_LATENCY = 200;
 
 app.use(bodyParser.json());
 
@@ -147,7 +154,7 @@ app.delete("/item/:id", function(req, res) {
 app.get("/pinterest/thumb", function(req, res) {
     console.log(`[GET] /pinterest/thumb ${req.query.url}`);
 
-    const filePath = path.join(__dirname, "temp", slug(req.query.url) + ".jpg");
+    const filePath = path.join(__dirname, "temp", slugify(req.query.url) + ".jpg");
 
     try {
         const stats = fs.statSync(filePath);

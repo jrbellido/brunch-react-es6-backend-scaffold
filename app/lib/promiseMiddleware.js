@@ -6,8 +6,8 @@ export default function promiseMiddleware() {
 
     const SUCCESS = type
 
-    const REQUEST = type + '_REQUEST'
-    const FAILURE = type + '_FAILURE'
+    const REQUEST = type + "_REQUEST"
+    const FAILURE = type + "_FAILURE"
 
     next({ ...rest, type: REQUEST })
 
