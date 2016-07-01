@@ -36,8 +36,10 @@ class NavMenu extends Component {
 	render() {
 		return (
 			<ul className="nav nav-pills nav-menu">
-				<NavMenuItem to={`/`} {...this.props}>Home</NavMenuItem>
+				<NavMenuItem to={`/hotels`} {...this.props}>Hotels</NavMenuItem>
+				<NavMenuItem to={`/bookings`} {...this.props}>Bookings</NavMenuItem>
 				{/* <NavMenuItem to={`/pins`} {...this.props}>Pinterest</NavMenuItem> */}
+				{/* <NavMenuItem to={`/items`} {...this.props}>Item</NavMenuItem> */}
 				<NavMenuItem to={`/about`} {...this.props}>About</NavMenuItem>
 			</ul>
 		)

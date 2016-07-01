@@ -12,7 +12,6 @@
 * Run:
 	* `npm run dev`
     * `npm run watch`
-    * `npm run api`
 
 ## Sources
 
