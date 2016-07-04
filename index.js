@@ -11,7 +11,7 @@ var config = require("./config")(process.argv);
 var server = require("./server").default; // TODO: ES6 conversion results in a default attribute
 var api = require("./api").default;
 
-api.listen(3131, function() {
+api(config).listen(3131, function() {
   console.log("API listening on port", 3131);
 });
 

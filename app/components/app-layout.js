@@ -16,7 +16,7 @@ class AppLayout extends Component {
         <div className="row">
           <div className="col-md-12">
             <div className="brand app-header">
-              <h1>Bedsonline</h1>
+              <h1></h1>
           
               <NavMenu route={this.props.route} location={this.props.location} />
             </div>

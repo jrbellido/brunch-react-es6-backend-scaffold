@@ -16,20 +16,6 @@ import fetchComponentData from "./app/lib/fetchComponentData"
 import appReducers from "./app/reducers"
 import promiseMiddleware from "./app/lib/promiseMiddleware"
 
-
-
-import apitude from "./app/lib/apitudeClient"
-
-apitude.hotelAvail().then((d) => {
-  console.log("finished", d.data)
-}).catch((e) => {
-  console.log("error", e)
-})
-
-
-
-
-
 const appServer = function(config) {
   const app = express()
 

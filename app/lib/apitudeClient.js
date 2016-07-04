@@ -1,22 +1,17 @@
 import axios from "axios"
 import crypto from "crypto"
 
-const apiKey = "demo"
-const apiSecret = "demo"
-
 export default {
-	"hotelAvail": function() {
+	"hotelAvail": function(options, params) {
 		// sha256Hex(apiKey + sharedSecret + System.currentTimeMillis() / 1000)
-		const signature = apiKey + apiSecret + Math.round(new Date().getTime() / 1000)
+		const signature = options.key + options.secret + Math.round(new Date().getTime() / 1000)
 		const hash = crypto.createHash('sha256').update(signature).digest('hex')
-
-		console.log(signature, hash)
 
         return axios.post("https://api.test.hotelbeds.com/hotel-api/1.0/hotels", {
             "stay": {
-                "checkIn": "2016-09-08",
-                "checkOut": "2016-09-10",
-                "shiftDays": "2"
+                "checkIn": params.checkInDate,
+                "checkOut": params.checkOutDate,
+                "shiftDays": params.shiftDays
             },
             "occupancies": [
                 {
@@ -59,13 +54,13 @@ export default {
                 }
             ],
             "destination": {
-                "code": "PMI",
-                "zone": "90"
+                "code": params.destination
+                /*, "zone": "90"*/
             }
         }, 
         {
 	        "headers": {
-	            "Api-Key": apiKey,
+	            "Api-Key": options.key,
 	            "X-Signature": hash,
 	            "Accept": "application/json"
 	        }

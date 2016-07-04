@@ -16,8 +16,10 @@ $fa-font-path: "../../node_modules/font-awesome/fonts";
 @import "./modules/_base";
 @import "./modules/_layout";
 @import "./modules/_footer";
-@import "./modules/_item_manager";
 @import "./modules/_nav";
 @import "./modules/_header";
 @import "./modules/_form";
+
+@import "./modules/_hotel_search";
+@import "./modules/_item_manager";
 // /App
