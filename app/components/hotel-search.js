@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from "react"
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 import { withRouter, Link } from "react-router"
+import apitude from "../lib/apitudeClient"
 
 import console from "../lib/console"
 
