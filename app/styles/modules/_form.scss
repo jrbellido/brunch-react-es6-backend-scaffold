@@ -4,3 +4,27 @@
 	    font-style: italic;
 	}
 }
+
+.action-buttons {
+	display: block;
+	margin-top: 1em;
+}
+
+.flatpickr-wrapper {
+	.flatpickr-calendar {
+		.flatpickr-days {
+			.flatpickr-day {
+				border-radius: 0;
+			}
+		}
+
+		.flatpickr-month {
+			.flatpickr-prev-month,
+			.flatpickr-next-month {
+				width: 2em;
+				height: 2em;
+				line-height: 2em;
+			}
+		}
+	}
+}

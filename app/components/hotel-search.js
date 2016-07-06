@@ -6,6 +6,8 @@ import { FormControl, Button, FormGroup, Col } from "react-bootstrap/lib"
 import { Form, ValidatedInput } from "react-bootstrap-validation"
 import axios from "axios"
 
+import DatePicker from "./date-picker"
+
 import console from "../lib/console"
 
 class HotelSearch extends Component {
@@ -50,9 +52,19 @@ class HotelSearch extends Component {
                     name="q"
                     placeholder="Enter hotel name, destination, dates, etc."
                   />
-
-                  <Button bsStyle="primary" type="submit">Search</Button>
                 </FormGroup>
+
+                <FormGroup>
+                  <DatePicker />
+                </FormGroup>
+
+                <FormGroup>
+                  <DatePicker />
+                </FormGroup>
+
+                <div className="action-buttons">
+                  <Button bsStyle="primary" type="submit">Search</Button>
+                </div>
               </Form>
             </div>
           </div>
